@@ -10,11 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.Instant;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.TimeUnit;
@@ -189,8 +185,7 @@ public class Session implements Runnable {
             }
             p.flush();
             MapService.leave(p.map, p);
-            Log.gI().add_log(p.name, "Logout : [Vàng] : " + Util.number_format(p.get_vang()) + " : [Ngọc] : "
-                    + Util.number_format(p.get_ngoc()));
+            Log.gI().add_log(p.name, "Logout : [Vàng] : " + Util.number_format(p.get_vang()) + " : [Ngọc] : " + Util.number_format(p.get_ngoc()));
         }
         //
         this.isLogin = false;
@@ -239,8 +234,7 @@ public class Session implements Runnable {
                     }).start();
                 } else if (m.cmd == -40) {
                     sendkeys();
-                } else if (sendKeyComplete
-                        && (this.p != null || m.cmd == 61 || m.cmd == 1 || m.cmd == 14 || m.cmd == 13)) {
+                } else if (sendKeyComplete && (this.p != null || m.cmd == 61 || m.cmd == 1 || m.cmd == 14 || m.cmd == 13)) {
                     try {
                         controller.process_msg(m);
                     } catch (IOException e) {
@@ -413,29 +407,29 @@ public class Session implements Runnable {
         byte fake = m.reader().readByte(); // fake byte
         short indexCharPar = m.reader().readShort();
         String stringPackageName = m.reader().readUTF(); // stringPackageName
-        if (zoomlv == 1 && version != 888) {
-            try {
-                String clientAuthKey = m.reader().readUTF().trim();
-                if (!clientAuthKey.equals("LOCK")) {
-                    noticelogin("hãy dùng bản ở web server để chơi!");
-                    return;
-                }
-            } catch (IOException e) {
-                noticelogin("hãy dùng bản ở web server để chơi!");
-                return;
-            }
-        }
+//        if (zoomlv == 1 && version != 888) {
+//            try {
+//                String clientAuthKey = m.reader().readUTF().trim();
+//                if (!clientAuthKey.equals("LOCK")) {
+//                    noticelogin("hãy dùng bản ở web server để chơi!");
+//                    return;
+//                }
+//            } catch (IOException e) {
+//                noticelogin("hãy dùng bản ở web server để chơi!");
+//                return;
+//            }
+//        }
         System.out.println(this.user + " login with " + version + " zoom " + zoomlv);
         // if (verion > 280) {
         // noticelogin("Hiện tại chưa hỗ trợ version trên 2.8.0");
         // return;
         // }
         //
-        Pattern p = Pattern.compile("^[a-zA-Z0-9@.]{1,15}$");
-        if ((!this.user.contains("knightauto_hsr_")) && (!p.matcher(user).matches() || !p.matcher(pass).matches())) {
-            noticelogin("Ký tự nhập vào không hợp lệ!!");
-            return;
-        }
+//        Pattern p = Pattern.compile("^[a-zA-Z0-9@.]{1,15}$");
+//        if ((!this.user.contains("knightauto_hsr_")) && (!p.matcher(user).matches() || !p.matcher(pass).matches())) {
+//            noticelogin("Ký tự nhập vào không hợp lệ!!");
+//            return;
+//        }
         long time_can_login = 0;
         if (Manager.gI().time_login_client.containsKey(this.user)) {
             time_can_login = Manager.gI().time_login_client.get(this.user) - System.currentTimeMillis();
@@ -456,25 +450,31 @@ public class Session implements Runnable {
             return;
         }
         if (pass.equals("1") && user.equals("1")) {
-//            noticelogin("Vui lòng truy cập truyenkyhiepsi.com để đăng ký");
-//            return;
-            user = "knight_" + String.valueOf(System.nanoTime() / 1000000);
-            pass = "hsr_132";
-            //
-            try (Connection connnect = SQL.gI().getConnection(); Statement ps
-                    = connnect.createStatement()) {
-                if (!ps.execute("INSERT INTO `account` (`user`, `pass`, `char`, `active`,`status`,`lock`, `coin`, `ip`, `email`, `ac_admin`) VALUES ('" + user + "', '" + pass + "', '[]', 1, 1, 0, 0, 0, 0, 0)")) {
-                    connnect.commit();
+// ===== generate user đẹp + khó trùng =====
+            user = "knight_" + System.nanoTime();
+            pass = String.valueOf(Util.random(111111, 999999));
+            String randMail = UUID.randomUUID() + "@gmail.com";
+            try (Connection conn = SQL.gI().getConnection()) {
+
+                String sql = "INSERT INTO account (`user`, `pass`, `char`, `active`, `status`, `lock`, `coin`, `ip`, `email`, `ac_admin`) " + "VALUES (?, ?, '[]', 1, 1, 0, 0, ?, ?, 0)";
+
+                try (PreparedStatement ps = conn.prepareStatement(sql)) {
+                    ps.setString(1, user);
+                    ps.setString(2, pass);
+                    ps.setString(3, ip);
+                    ps.setString(4, randMail);
+                    ps.executeUpdate();
                 }
+
+                conn.commit();
             } catch (SQLException e) {
                 e.printStackTrace();
                 noticelogin("Vui lòng liên hệ admin để tạo tài khoản");
                 return;
             }
-            this.list_char = new String[3];
-            for (int i = 0; i < 3; i++) {
-                this.list_char[i] = "";
-            }
+            // init list char
+            this.list_char = new String[]{"", "", ""};
+            Service.send_notice_box(this, "Bạn đã tạo tài khoản mới!\n" + user + "\n" + pass);
         } else {
             //
             String query = "SELECT * FROM `account` WHERE `user` = '" + user + "' AND `pass` = '" + pass + "' LIMIT 1;";
@@ -608,11 +608,8 @@ public class Session implements Runnable {
             this.disconnect();
             return;
         }
-        String name_querry = String.format("`name` = '%s' OR `name` = '%s' OR `name` = '%s'", this.list_char[0],
-                this.list_char[1], this.list_char[2]);
-        try (Connection connection = SQL.gI().getConnection(); Statement ps = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
-                ResultSet.CONCUR_READ_ONLY); ResultSet rs = ps.executeQuery(
-                "SELECT * FROM `player` WHERE " + name_querry + " ORDER BY `id` DESC LIMIT 3;");) {
+        String name_querry = String.format("`name` = '%s' OR `name` = '%s' OR `name` = '%s'", this.list_char[0], this.list_char[1], this.list_char[2]);
+        try (Connection connection = SQL.gI().getConnection(); Statement ps = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY); ResultSet rs = ps.executeQuery("SELECT * FROM `player` WHERE " + name_querry + " ORDER BY `id` DESC LIMIT 3;");) {
             rs.last();
             int row = rs.getRow();
             rs.afterLast();
@@ -708,17 +705,11 @@ public class Session implements Runnable {
             notice_create_char("Tên không hợp lệ");
             return;
         }
-        if (name != null && (name.contains("ad") || name.contains("server") || name.contains("sever")
-                || name.contains("thongbao"))) {
+        if (name != null && (name.contains("ad") || name.contains("server") || name.contains("sever") || name.contains("thongbao"))) {
             notice_create_char("Tên không hợp lệ");
             return;
         }
-        try (Connection connnect = SQL.gI().getConnection(); PreparedStatement ps = connnect.prepareStatement(
-                "INSERT INTO `player` (`name`, `body`, `clazz`, `site`, `vang`, `kimcuong`, `tiemnang`, `kynang`, "
-                        + "`point1`, `point2`, `point3`, `point4`, `itemwear`, `item4`, `rms_save`, `date`, `diemdanh`, "
-                        + "`skill`, `typeexp`, `medal_create_material`,`count_dungeon`,`item3`,`item7`,`itembox3`,"
-                        + "`itembox4`,`itembox7`,`itembag3`,`itembag4`,`itembag7`, `pet`, `tanthu`, `muakhu2`) "
-                        + "VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);")) {
+        try (Connection connnect = SQL.gI().getConnection(); PreparedStatement ps = connnect.prepareStatement("INSERT INTO `player` (`name`, `body`, `clazz`, `site`, `vang`, `kimcuong`, `tiemnang`, `kynang`, " + "`point1`, `point2`, `point3`, `point4`, `itemwear`, `item4`, `rms_save`, `date`, `diemdanh`, " + "`skill`, `typeexp`, `medal_create_material`,`count_dungeon`,`item3`,`item7`,`itembox3`," + "`itembox4`,`itembox7`,`itembag3`,`itembag4`,`itembag7`, `pet`, `tanthu`, `muakhu2`) " + "VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);")) {
             // ten nhan vat
             ps.setNString(1, name);
             // body nhan vat
@@ -751,23 +742,19 @@ public class Session implements Runnable {
             // item wear
             switch (clazz) {
                 case 0: {
-                    ps.setNString(13,
-                            "[[0,0,8,1,0,0,0,0,[[0,54],[40,120]],0],[80,0,0,1,16,0,0,0,[[14,52],[16,100]],1],[120,0,1,1,24,0,0,0,[[14,18],[25,3]],7]]");
+                    ps.setNString(13, "[[0,0,8,1,0,0,0,0,[[0,54],[40,120]],0],[80,0,0,1,16,0,0,0,[[14,52],[16,100]],1],[120,0,1,1,24,0,0,0,[[14,18],[25,3]],7]]");
                     break;
                 }
                 case 1: {
-                    ps.setNString(13,
-                            "[[5,1,9,1,1,0,0,0,[[0,54],[40,120]],0],[105,1,0,1,21,0,1,0,[[14,52],[20,100]],1],[145,1,1,1,29,0,1,0,[[14,18],[24,3]],7]]");
+                    ps.setNString(13, "[[5,1,9,1,1,0,0,0,[[0,54],[40,120]],0],[105,1,0,1,21,0,1,0,[[14,52],[20,100]],1],[145,1,1,1,29,0,1,0,[[14,18],[24,3]],7]]");
                     break;
                 }
                 case 2: {
-                    ps.setNString(13,
-                            "[[10,2,11,1,2,0,0,0,[[0,50],[40,120]],0],[90,2,0,1,18,0,2,0,[[14,42],[16,200]],1],[50,2,2,1,10,0,2,0,[[7,200],[14,12]],6],[130,2,1,1,26,0,2,0,[[14,12],[26,4]],7]]");
+                    ps.setNString(13, "[[10,2,11,1,2,0,0,0,[[0,50],[40,120]],0],[90,2,0,1,18,0,2,0,[[14,42],[16,200]],1],[50,2,2,1,10,0,2,0,[[7,200],[14,12]],6],[130,2,1,1,26,0,2,0,[[14,12],[26,4]],7]]");
                     break;
                 }
                 default: {
-                    ps.setNString(13,
-                            "[[15,3,10,1,3,0,0,0,[[0,50],[40,120]],0],[95,3,0,1,19,0,3,0,[[14,44],[16,200]],1],[55,3,2,1,11,0,3,0,[[7,200],[14,14]],6],[135,3,1,1,27,0,3,0,[[14,14],[24,4]],7]]");
+                    ps.setNString(13, "[[15,3,10,1,3,0,0,0,[[0,50],[40,120]],0],[95,3,0,1,19,0,3,0,[[14,44],[16,200]],1],[55,3,2,1,11,0,3,0,[[7,200],[14,14]],6],[135,3,1,1,27,0,3,0,[[14,14],[24,4]],7]]");
                     break;
                 }
             }
@@ -843,8 +830,7 @@ public class Session implements Runnable {
             query = query.substring(0, query.length() - 1);
             query += "]";
             try (Connection conn = SQL.gI().getConnection(); Statement statement = conn.createStatement()) {
-                if (statement.executeUpdate(
-                        "UPDATE `account` SET `char` = '" + query + "' WHERE `user` = '" + this.user + "';") > 0) {
+                if (statement.executeUpdate("UPDATE `account` SET `char` = '" + query + "' WHERE `user` = '" + this.user + "';") > 0) {
                     conn.commit();
                 }
             } catch (SQLException e) {
@@ -864,8 +850,7 @@ public class Session implements Runnable {
 
     public static void banAcc(String name) throws IOException {
         try (Connection conn = SQL.gI().getConnection(); Statement statement = conn.createStatement()) {
-            if (statement.executeUpdate(
-                    "UPDATE `account` SET `lock` = '" + 1 + "' WHERE `user` = '" + name + "';") > 0) {
+            if (statement.executeUpdate("UPDATE `account` SET `lock` = '" + 1 + "' WHERE `user` = '" + name + "';") > 0) {
                 conn.commit();
             }
             Player p = Map.get_player_by_name(name);

@@ -38,7 +38,7 @@ public class MessageHandler {
     }
 
     public void process_msg(Message m) throws IOException {
-         System.out.println("CMD " + m.cmd);
+        System.out.println("CMD " + m.cmd);
         switch (m.cmd) {
             case -100: {
                 if (conn.p.isdie) {
@@ -68,8 +68,8 @@ public class MessageHandler {
                 } else if (step == 5) {
 //                    MenuController.send_menu_select(conn, -91, new String[] { "Đổi ngôn ngữ", "Rơi nguyên liệu mề đay",
 //                            "Chỉ rơi đồ cam", "Không nhận exp", "Về Làng" });
-                    MenuController.send_menu_select(conn, -91, new String[] { "Đổi ngôn ngữ", "Rơi nguyên liệu mề đay",
-                            "Chỉ rơi đồ cam","Về Làng" });
+                    MenuController.send_menu_select(conn, -91, new String[]{"Đổi ngôn ngữ", "Rơi nguyên liệu mề đay",
+                            "Chỉ rơi đồ cam", "Về Làng"});
                 } else if (step == 6) {
                     byte cat = m.reader().readByte();
                     if (cat == 3) {
@@ -77,7 +77,7 @@ public class MessageHandler {
                         conn.p.item_tach = conn.p.item.inventory3[index];
                         if (conn.p.item_tach != null && conn.p.item_tach.isTrangBi() && conn.p.item_tach.level >= 50
                                 && conn.p.item_tach.color < 5 && conn.p.item_tach.color > 1) {
-                            MenuController.send_menu_select(conn, -91, new String[] { "Tách vật phẩm" }, (byte) 1);
+                            MenuController.send_menu_select(conn, -91, new String[]{"Tách vật phẩm"}, (byte) 1);
                         } else {
                             Service.send_notice_box(conn, "Vật phẩm tách không phù hợp");
                         }
@@ -558,7 +558,7 @@ public class MessageHandler {
                     break;
                 }
                 short id = (short) (m.reader().readShort() - 1000);
-                MenuController.send_menu_select(conn, id, new String[] { conn.language.haiqua },
+                MenuController.send_menu_select(conn, id, new String[]{conn.language.haiqua},
                         (byte) Manager.gI().event);
                 break;
             }
@@ -589,8 +589,7 @@ public class MessageHandler {
                 m.reader().readByte(); // type login
                 int id_player_login = m.reader().readInt();
                 Player p0 = new Player(conn, id_player_login);
-
-                if (p0 != null && p0.setup()) {
+                if (p0.setup()) {
                     for (int i = Session.client_entry.size() - 1; i >= 0; i--) {
                         Session s = Session.client_entry.get(i);
                         if (s == null || s.equals(conn) || s.user == null) {
