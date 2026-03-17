@@ -14,6 +14,55 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
+
+-- Dumping database structure for hso
+DROP DATABASE IF EXISTS `hso`;
+CREATE DATABASE IF NOT EXISTS `hso` /*!40100 DEFAULT CHARACTER SET latin1 */;
+USE `hso`;
+
+-- Dumping structure for table hso.account
+DROP TABLE IF EXISTS `account`;
+CREATE TABLE IF NOT EXISTS `account` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user` varchar(255) DEFAULT NULL,
+  `pass` varchar(255) DEFAULT NULL,
+  `active` int(11) NOT NULL DEFAULT '1',
+  `coin` int(11) NOT NULL DEFAULT '0',
+  `tongnap` int(11) DEFAULT '0',
+  `otp` int(6) DEFAULT NULL,
+  `phone` varchar(255) DEFAULT '''0''',
+  `ac_admin` tinyint(4) NOT NULL DEFAULT '0',
+  `char` varchar(255) DEFAULT '[]',
+  `status` tinyint(4) NOT NULL DEFAULT '0',
+  `lock` tinyint(4) NOT NULL DEFAULT '0',
+  `email` varchar(255) NOT NULL,
+  `ip` varchar(255) NOT NULL,
+  `last_ip` varchar(100) DEFAULT NULL,
+  `tiennap` int(11) NOT NULL DEFAULT '0',
+  `pass2` varchar(255) DEFAULT '0',
+  `diemnap` int(11) NOT NULL DEFAULT '0',
+  `expiration_otp` int(11) DEFAULT NULL,
+  `token` int(11) DEFAULT NULL,
+  `create_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `typeLanguage` tinyint(4) DEFAULT '0',
+  `referral` varchar(50) DEFAULT NULL,
+  `total_ref` int(11) DEFAULT '0',
+  `vip` int(11) DEFAULT '0',
+  `tokenlog` varchar(250) CHARACTER SET latin1 DEFAULT NULL,
+  `createkich` datetime DEFAULT CURRENT_TIMESTAMP,
+  `createtime` datetime DEFAULT CURRENT_TIMESTAMP,
+  `ip_web` varchar(250) CHARACTER SET latin1 DEFAULT NULL,
+  `level` varchar(250) CHARACTER SET latin1 DEFAULT 'member',
+  `passc2admin` varchar(250) CHARACTER SET latin1 DEFAULT NULL,
+  `role` int(11) NOT NULL DEFAULT '0',
+  `tichdiem` int(250) NOT NULL DEFAULT '0',
+  `comment_count` int(250) NOT NULL DEFAULT '0',
+  `comment_day` datetime DEFAULT NULL,
+  `time_post` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE KEY `user` (`user`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+
 -- Dumping data for table hso.account: ~5 rows (approximately)
 DELETE FROM `account`;
 INSERT INTO `account` (`id`, `user`, `pass`, `active`, `coin`, `tongnap`, `otp`, `phone`, `ac_admin`, `char`, `status`, `lock`, `email`, `ip`, `last_ip`, `tiennap`, `pass2`, `diemnap`, `expiration_otp`, `token`, `create_time`, `typeLanguage`, `referral`, `total_ref`, `vip`, `tokenlog`, `createkich`, `createtime`, `ip_web`, `level`, `passc2admin`, `role`, `tichdiem`, `comment_count`, `comment_day`, `time_post`) VALUES
@@ -22,6 +71,49 @@ INSERT INTO `account` (`id`, `user`, `pass`, `active`, `coin`, `tongnap`, `otp`,
 	(3, 'knight_8913458', 'hsr_132', 1, 0, 0, NULL, '\'0\'', 0, '[]', 1, 0, '0', '0', NULL, 0, '0', 0, NULL, NULL, '2026-03-17 08:46:40', 0, NULL, 0, 0, NULL, '2026-03-17 15:46:40', '2026-03-17 15:46:40', NULL, 'member', NULL, 0, 0, 0, NULL, NULL),
 	(4, 'knight_8941145', 'hsr_132', 1, 0, 0, NULL, '\'0\'', 0, '[]', 1, 0, '0', '0', NULL, 0, '0', 0, NULL, NULL, '2026-03-17 08:47:07', 0, NULL, 0, 0, NULL, '2026-03-17 15:47:07', '2026-03-17 15:47:07', NULL, 'member', NULL, 0, 0, 0, NULL, NULL),
 	(5, 'knight_9492675796000', '113462', 1, 0, 0, NULL, '\'0\'', 0, '["cscscasc"]', 1, 0, 'ceb3b455-014a-4753-9b81-25d230fcf4fc@gmail.com', '127.0.0.1', '127.0.0.1', 0, '0', 0, NULL, NULL, '2026-03-17 08:56:19', 0, NULL, 0, 0, NULL, '2026-03-17 15:56:19', '2026-03-17 15:56:19', NULL, 'member', NULL, 0, 0, 0, NULL, NULL);
+
+-- Dumping structure for table hso.account_copy1
+DROP TABLE IF EXISTS `account_copy1`;
+CREATE TABLE IF NOT EXISTS `account_copy1` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user` varchar(255) DEFAULT NULL,
+  `pass` varchar(255) DEFAULT NULL,
+  `active` int(11) NOT NULL DEFAULT '1',
+  `coin` int(11) NOT NULL DEFAULT '0',
+  `tongnap` int(11) DEFAULT '0',
+  `otp` int(6) DEFAULT NULL,
+  `phone` varchar(255) DEFAULT '''0''',
+  `ac_admin` tinyint(4) NOT NULL DEFAULT '0',
+  `char` varchar(255) DEFAULT '[]',
+  `status` tinyint(4) NOT NULL DEFAULT '0',
+  `lock` tinyint(4) NOT NULL DEFAULT '0',
+  `email` varchar(255) NOT NULL,
+  `ip` varchar(255) NOT NULL,
+  `last_ip` varchar(100) DEFAULT NULL,
+  `tiennap` int(11) NOT NULL DEFAULT '0',
+  `pass2` varchar(255) DEFAULT '0',
+  `diemnap` int(11) NOT NULL DEFAULT '0',
+  `expiration_otp` int(11) DEFAULT NULL,
+  `token` int(11) DEFAULT NULL,
+  `create_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `typeLanguage` tinyint(4) DEFAULT '0',
+  `referral` varchar(50) DEFAULT NULL,
+  `total_ref` int(11) DEFAULT '0',
+  `vip` int(11) DEFAULT '0',
+  `tokenlog` varchar(250) CHARACTER SET latin1 DEFAULT NULL,
+  `createkich` datetime DEFAULT CURRENT_TIMESTAMP,
+  `createtime` datetime DEFAULT CURRENT_TIMESTAMP,
+  `ip_web` varchar(250) CHARACTER SET latin1 DEFAULT NULL,
+  `level` varchar(250) CHARACTER SET latin1 DEFAULT 'member',
+  `passc2admin` varchar(250) CHARACTER SET latin1 DEFAULT NULL,
+  `role` int(11) NOT NULL DEFAULT '0',
+  `tichdiem` int(250) NOT NULL DEFAULT '0',
+  `comment_count` int(250) NOT NULL DEFAULT '0',
+  `comment_day` datetime DEFAULT NULL,
+  `time_post` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE KEY `user` (`user`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=371 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 -- Dumping data for table hso.account_copy1: ~370 rows (approximately)
 DELETE FROM `account_copy1`;
@@ -397,7 +489,22 @@ INSERT INTO `account_copy1` (`id`, `user`, `pass`, `active`, `coin`, `tongnap`, 
 	(369, 'nhay123', '098765', 0, 0, 0, 98765, '\'0\'', 0, '["satthunhj"]', 1, 0, '', '', '171.224.79.164', 0, '0', 0, NULL, NULL, '2025-11-07 12:58:47', 0, NULL, 0, 0, '5a1aea8325a893bbc8a432d373b8ab6767d6afcc9f4255a26a', '2025-11-07 19:58:47', '2025-11-07 19:58:47', '2402:800:6135:624a:34ac:38ce:da87:20b7', 'member', NULL, 0, 0, 0, NULL, NULL),
 	(370, 'bang100', '123123', 0, 20000, 20000, 123147, '\'0\'', 0, '[]', 1, 0, '', '', NULL, 0, '0', 20, NULL, NULL, '2025-11-07 13:00:18', 0, NULL, 0, 0, 'c8eddad7f8f796f602400728706302af4fa3159e24b65f0e06', '2025-11-07 20:00:18', '2025-11-07 20:00:18', '2a09:bac5:d435:16dc::247:12d', 'member', NULL, 0, 0, 0, NULL, NULL);
 
--- Dumping data for table hso.articles: ~10 rows (approximately)
+-- Dumping structure for table hso.articles
+DROP TABLE IF EXISTS `articles`;
+CREATE TABLE IF NOT EXISTS `articles` (
+  `id` int(11) NOT NULL,
+  `userId` int(11) NOT NULL,
+  `type` varchar(255) NOT NULL,
+  `code` varchar(255) NOT NULL,
+  `title` text CHARACTER SET utf8 NOT NULL,
+  `content` longtext CHARACTER SET utf8 NOT NULL,
+  `like` longtext NOT NULL,
+  `view` int(11) NOT NULL,
+  `time` int(11) NOT NULL,
+  `created_at` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Dumping data for table hso.articles: ~8 rows (approximately)
 DELETE FROM `articles`;
 INSERT INTO `articles` (`id`, `userId`, `type`, `code`, `title`, `content`, `like`, `view`, `time`, `created_at`) VALUES
 	(0, 1, 'index', 'B40eB1z9RHPO', 'Chức năng điểm danh vọng.', '<p><font style="" color="#0000ff"><b style="">Điểm danh vọng có thể kiếm bằng cách như sau :</b></font></p><p>- Tiêu diệt quái chênh lệch 9 level. Cách tính điểm như sau: <span style="background-color: rgb(255, 255, 0);">10 + level quái - level nhân vật</span></p><p>- Tiêu diệt 1 con boss thế giới bạn nhận được 500 điểm danh vọng.</p><p>- Trở thành vua chiến trường bạn nhân được 1000 điểm danh vọng.</p><p>- Là người trong bang giữ đá cuối cùng trong chiếm thành được 1000 điểm danh vọng.</p><p><b><font color="#ff0000" style=""><u>Lưu ý :</u>&nbsp;Nếu bạn bị chết bằng bất kỳ lý do nào bạn sẽ bị trừ 10 điểm danh vọng. ( Phải trên 1000 điểm danh vọng mới bị trừ nhé)</font></b></p>', 'admin,', 128, 1705375682, '10:28:02 16/01/2024'),
@@ -411,16 +518,68 @@ INSERT INTO `articles` (`id`, `userId`, `type`, `code`, `title`, `content`, `lik
 	(0, 1, 'index', 'gzhC6NjnR9L3', 'Thông tin Open Test và đua top Test', '<h5><font color="#397b21">Hiệp Sĩ SHARINGAN sẽ open beta test vào 20h ngày 14/03/2024</font><font color="#6ba54a">.</font></h5><p style="margin-bottom: 8px;"></p><h5 style="position: relative; direction: ltr;"><span style="font-family: Arial;">Thông tin chương trình giới thiệu người chơi nhận quà<font color="#ff0000"> </font></span><a href="http://sharingan.click/chi-tiet-bai-viet/V6AIkyxsrhUx/1" target="_blank" style=""><font color="#ff0000">Xem tại đây</font></a></h5><h5 style="position: relative; direction: ltr;"><span style="font-family: Arial;">Thông tin đua top Beta Test :</span></h5><p></p><p style="position: relative; direction: ltr;"><span style="font-family: Arial;">&nbsp;- ﻿Đăng ký tài khoản test miễn phí ( tài khoản sẽ vẫn dùng được khi open chỉ xoá nhân vật )</span></p><p style="position: relative; direction: ltr;">&nbsp;- Giftcode hỗ trợ : tanthu ( 2 tỷ vàng, ngọc, Pet bóng ma max chỉ số 4 ngày)</p><p style="position: relative; direction: ltr;">&nbsp;- Đua top level trong 4 ngày xếp hạng theo level ( cùng level tính theo exp )</p><p style="position: relative; direction: ltr;">&nbsp;- Quà đua top beta test :</p><ol><li style="position: relative; direction: ltr;">Top 1 : 300k coin + Phượng hoàng băng max chỉ số 1 tháng</li><li style="position: relative; direction: ltr;">Top 2 : 200k coin + Phượng hoàng băng max chỉ số 20 ngày</li><li style="position: relative; direction: ltr;">Top 3 : 100k coin + Phượng hoàng băng max chỉ số 10 ngày</li><li style="position: relative; direction: ltr;">Top 4 - 10 : 70k coin</li></ol><p style="position: relative; direction: ltr;">Top sẽ bắt đầu tính từ lúc open đến 23h59 ngày 18/03/2024</p><p style="position: relative; direction: ltr;">Sau khi đua top beta test tất cả tài khoản sẽ chuyển về trạng thái chưa kích hoạt. Tài khoản chưa kích hoạt sẽ khoá 1 số tính năng liên quan đến trao đổi giữa các người chơi, mở ly, đi buôn, chat thế giới. Để kích hoạt cần 20k coin. Chúc anh em hiệp sĩ chơi game vui vẻ &lt;3</p>', 'admin,', 207, 1710298758, '09:59:18 13/03/2024'),
 	(0, 1, 'index', 'VJcMVUuZ8RI2', 'HSO Sharingan chính thức Open và Thông tin sự kiện đua top', '<h4><b><font color="#397b21">Server sẽ chính thức khởi chạy vào lúc 19h ngày 19/03/2024.</font></b></h4><p style="margin-bottom: 0px;">Các bạn không cần kích hoạt vẫn có thể chơi game, nhận quà tân thủ bình thường</p><p style="margin-bottom: 0px;">Khi tạo thành công nhân vật các bạn sẽ có những tài nguyên bao gồm:</p><ul style="padding-left: 2rem; margin-bottom: 1rem;"><li>20.000 ngọc</li><li>5.000.000 vàng</li><li>Bình HP, MP, rương vàng, tím, đỏ</li></ul><p style="margin-bottom: 0px;">Sau đó các bạn gặp&nbsp;NPC Miss Anna&nbsp;và nhập GIFTCODE&nbsp;<font color="#ff0000"><b>open </b></font>để nhận quà 1 trứng pet bóng ma thời hạn 4 ngày.<br></p><p style="margin-bottom: 0px;">Khi tài khoản chưa được kích hoạt, các bạn sẽ không thể sử dụng 1 số tính năng</p><p style="margin-bottom: 0px;">Chi phí kích hoạt tài khoản là&nbsp;20.000 Coin&nbsp;/ 1 tài khoản để có thể mở tính năng</p><p style="margin-bottom: 0px;">Khi kích hoạt thành công, các bạn lại gặp NPC Miss Anna và nhập GIFTCODE&nbsp;<font color="#ff0000">tanthu </font>để nhận quà kích hoạt bao gồm:&nbsp;</p><ul style="margin-bottom: 1rem; padding-left: 2rem;"><li>5.000 ngọc xanh</li><li>1.000.000</li><li>Cánh thời trang hạn 4 ngày</li></ul><p>Máy chủ sẽ x2 số coin khi nạp trong 5 ngày tính từ ngày bắt đầu khởi chạy.<br>(1 VNĐ = 2 coin hết khuyến mãi 1 VNĐ = 1 coin )<br>Ngoài ra khi nạp bạn sẽ được tính điểm nạp và có thể nhanh tay đổi thành tích để nhận những vật phẩm hot.<br>Bạn có thể xem hướng dẫn chức năng thành tích&nbsp;<a href="http://sharingan.click/chi-tiet-bai-viet/wcqLaQAZSeiL/1" target="_blank"><b style=""><font color="#397b21">tại đây</font></b></a></p><p>Các bạn có thể xem bảng xếp hạng<b>&nbsp;<a href="http://sharingan.click/bang-xep-hang" target="_blank"><font color="#397b21">tại đây</font></a></b></p><span style="color: rgb(255, 0, 0); font-weight: 700;">Sự kiện đua top Level và top Nạp sẽ diễn ra từ ngày 19/03/2024 đến hết ngày 31/03/2024.</span><h5 style="text-align: center; "><b><font color="#ff0000">I. Đua Top Level</font></b></h5><p style="margin-bottom: 0px;"><img src="https://static.xx.fbcdn.net/images/emoji.php/v9/t94/1/16/1f947.png" alt="?" height="16" width="16" style="max-width: 100%;">&nbsp;TOP 1:</p><ul style="padding-left: 2rem; margin-bottom: 1rem;"><li>500.000 coin</li><li>Đồ thời trang hiệp sĩ phong cách vĩnh viễn ( 50% dame)</li><li>Dây chuyền mặt trăng vĩnh viễn</li><li>1 trứng pet đại bàng vĩnh viễn</li><li>1 Sách skill tự chọn</li><li>5 đá Krypton 3</li><li>500 đá 3 màu</li></ul><p style="margin-bottom: 0px;"><img src="https://static.xx.fbcdn.net/images/emoji.php/v9/t15/1/16/1f948.png" alt="?" height="16" width="16" style="max-width: 100%;">&nbsp;TOP 2:</p><ul style="padding-left: 2rem; margin-bottom: 1rem;"><li>300.000 coin</li><li>Đồ thời trang Giáp rồng vĩnh viễn (40% dame)</li><li>Dây chuyền mặt trăng hạn 3 tháng</li><li>1 trứng pet rồng lửa hạn 3 tháng</li><li>1 Sách skill tự chọn</li><li>3 đá Krypton 3</li><li>300 đá 3 màu</li></ul><p style="margin-bottom: 0px;"><img src="https://static.xx.fbcdn.net/images/emoji.php/v9/t96/1/16/1f949.png" alt="?" height="16" width="16" style="max-width: 100%;">&nbsp;TOP 3:</p><ul style="padding-left: 2rem; margin-bottom: 1rem;"><li>200.000 coin</li><li>Đồ thời trang Giáp rồng vĩnh viễn (30% dame)</li><li>Dây chuyền mặt trăng hạn 1 tháng</li><li>1 trứng pet rồng lửa hạn 1 tháng</li><li>2 đá Krypton cấp 3</li><li>1 Sách skill tự chọn</li><li>200 đá 3 màu</li></ul><p style="margin-bottom: 0px;"><img src="https://static.xx.fbcdn.net/images/emoji.php/v9/ta8/1/16/1f396.png" alt="?" height="16" width="16" style="max-width: 100%;">&nbsp;TOP 4-10:</p><ul style="padding-left: 2rem; margin-bottom: 1rem;"><li style="">100.000 coin</li><li style="">Thời trang Giáp rồng hạn 3 tháng</li><li style="">100 đá 3 màu</li></ul><p><br></p><h5 style="text-align: center; "><b><font color="#ff0000">II. Đua top Nạp</font></b></h5><h5 style="text-align: center; "><b><font color="#ff0000"><br></font></b></h5><p style="margin-bottom: 0px;"><img src="https://static.xx.fbcdn.net/images/emoji.php/v9/t94/1/16/1f947.png" alt="?" height="16" width="16" style="max-width: 100%;">&nbsp;TOP 1:</p><ul style="padding-left: 2rem; margin-bottom: 1rem;"><li>1.000.000 coin</li><li>Áo choàng tỷ phú vĩnh viễn ( 50% dame )</li><li>Dây chuyền mặt trăng vĩnh viễn</li><li>1 trứng pet phượng hoàng băng vĩnh viễn</li><li>3 đá Krypton cấp 3</li><li>1 Sách skill tự chọn</li><li>500 đá 3 màu</li></ul><p style="margin-bottom: 0px;"><img src="https://static.xx.fbcdn.net/images/emoji.php/v9/t15/1/16/1f948.png" alt="?" height="16" width="16" style="max-width: 100%;">&nbsp;TOP 2:</p><ul style="padding-left: 2rem; margin-bottom: 1rem;"><li>500.000 coin</li><li>Áo choàng tỷ phú 3 tháng ( 50% dame )</li><li>Dây chuyền mặt trăng hạn 3 tháng</li><li>1 trứng pet phượng hoàng băng vĩnh viễn</li><li>3 đá Krypton cấp 2</li><li>1 Sách skill tự chọn</li><li>300 đá 3 màu</li></ul><p style="margin-bottom: 0px;"><img src="https://static.xx.fbcdn.net/images/emoji.php/v9/t96/1/16/1f949.png" alt="?" height="16" width="16" style="max-width: 100%;">&nbsp;TOP 3:</p><ul style="padding-left: 2rem; margin-bottom: 1rem;"><li>300.000 coin</li><li>Áo choàng tỷ phú 1 tháng ( 50% dame )</li><li>Dây chuyền mặt trăng hạn 1 tháng</li><li>1 trứng pet phượng hoàng băng 3 tháng</li><li>2 đá Krypton cấp 2</li><li>1 Sách skill tự chọn</li><li>200 đá 3 màu</li></ul><p style="margin-bottom: 0px;"><img src="https://static.xx.fbcdn.net/images/emoji.php/v9/ta8/1/16/1f396.png" alt="?" height="16" width="16" style="max-width: 100%;">&nbsp;TOP 4-10:</p><ul style="padding-left: 2rem; margin-bottom: 1rem;"><li style="">200.000 coin</li><li>Áo choàng tỷ phú 15 ngày ( 50% dame )</li><li style="">1 trứng pet phượng hoàng băng 1 tháng</li><li style="">100 đá 3 màu</li></ul><p><b><font color="#0000ff">Lưu ý : Quà sẽ được trao sau muộn nhất 3 ngày kể từ ngày kết thúc đua top.</font></b></p>', 'admin,', 143, 1710821280, '11:08:00 19/03/2024');
 
+-- Dumping structure for table hso.bank
+DROP TABLE IF EXISTS `bank`;
+CREATE TABLE IF NOT EXISTS `bank` (
+  `id` int(11) NOT NULL,
+  `tranId` varchar(255) NOT NULL,
+  `comment` varchar(255) NOT NULL,
+  `amount` int(11) NOT NULL,
+  `userId` int(11) NOT NULL,
+  `time` int(11) NOT NULL,
+  `created_at` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
 -- Dumping data for table hso.bank: ~0 rows (approximately)
 DELETE FROM `bank`;
+
+-- Dumping structure for table hso.biendongsodu
+DROP TABLE IF EXISTS `biendongsodu`;
+CREATE TABLE IF NOT EXISTS `biendongsodu` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(250) DEFAULT NULL,
+  `loai` varchar(250) DEFAULT NULL,
+  `money1` varchar(250) DEFAULT NULL,
+  `money` varchar(250) DEFAULT NULL,
+  `money2` varchar(250) DEFAULT NULL,
+  `luong1` varchar(250) DEFAULT '0',
+  `luong` varchar(250) DEFAULT '0',
+  `luong2` varchar(250) DEFAULT '0',
+  `note` varchar(250) DEFAULT NULL,
+  `createtime` varchar(250) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- Dumping data for table hso.biendongsodu: 0 rows
 DELETE FROM `biendongsodu`;
 /*!40000 ALTER TABLE `biendongsodu` DISABLE KEYS */;
 /*!40000 ALTER TABLE `biendongsodu` ENABLE KEYS */;
 
+-- Dumping structure for table hso.cards
+DROP TABLE IF EXISTS `cards`;
+CREATE TABLE IF NOT EXISTS `cards` (
+  `id` int(11) NOT NULL,
+  `userId` int(11) NOT NULL,
+  `serial` varchar(255) NOT NULL,
+  `code` varchar(255) NOT NULL,
+  `type` varchar(255) NOT NULL,
+  `amount` int(11) NOT NULL,
+  `time` int(11) NOT NULL,
+  `created_at` varchar(255) NOT NULL,
+  `status` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
 -- Dumping data for table hso.cards: ~0 rows (approximately)
 DELETE FROM `cards`;
+
+-- Dumping structure for table hso.category
+DROP TABLE IF EXISTS `category`;
+CREATE TABLE IF NOT EXISTS `category` (
+  `id` int(11) NOT NULL,
+  `title` text CHARACTER SET utf8 NOT NULL,
+  `type` varchar(255) NOT NULL,
+  `AOM` varchar(255) NOT NULL DEFAULT 'false'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- Dumping data for table hso.category: ~3 rows (approximately)
 DELETE FROM `category`;
@@ -428,6 +587,18 @@ INSERT INTO `category` (`id`, `title`, `type`, `AOM`) VALUES
 	(1, 'Hướng dẫn', 'index', 'true'),
 	(3, 'Báo Lỗi Nạp', 'baoloi', 'false'),
 	(2, 'Thảo luận', 'thaoluan', 'false');
+
+-- Dumping structure for table hso.chiem_mo
+DROP TABLE IF EXISTS `chiem_mo`;
+CREATE TABLE IF NOT EXISTS `chiem_mo` (
+  `idx` int(11) NOT NULL,
+  `isbuff_hp` tinyint(4) NOT NULL DEFAULT '0',
+  `name_clan` varchar(255) CHARACTER SET utf8mb4 DEFAULT NULL,
+  `nhanban` text CHARACTER SET utf8mb4,
+  `nhanban_save` text CHARACTER SET utf8mb4,
+  `time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`idx`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- Dumping data for table hso.chiem_mo: 16 rows
 DELETE FROM `chiem_mo`;
@@ -451,6 +622,27 @@ INSERT INTO `chiem_mo` (`idx`, `isbuff_hp`, `name_clan`, `nhanban`, `nhanban_sav
 	(65532, 0, NULL, NULL, NULL, '2026-03-17 13:42:39');
 /*!40000 ALTER TABLE `chiem_mo` ENABLE KEYS */;
 
+-- Dumping structure for table hso.clan
+DROP TABLE IF EXISTS `clan`;
+CREATE TABLE IF NOT EXISTS `clan` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) CHARACTER SET utf8mb4 DEFAULT NULL,
+  `name_short` varchar(255) CHARACTER SET utf8mb4 DEFAULT NULL,
+  `mems` text CHARACTER SET utf8mb4,
+  `level` int(11) DEFAULT NULL,
+  `exp` bigint(20) DEFAULT NULL,
+  `slogan` text CHARACTER SET utf8mb4,
+  `rule` text CHARACTER SET utf8mb4,
+  `notice` text CHARACTER SET utf8mb4,
+  `vang` bigint(20) DEFAULT NULL,
+  `kimcuong` int(11) DEFAULT NULL,
+  `max_mem` int(11) DEFAULT NULL,
+  `icon` int(11) DEFAULT NULL,
+  `item` text CHARACTER SET utf8mb4,
+  `time_item` text,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+
 -- Dumping data for table hso.clan: ~4 rows (approximately)
 DELETE FROM `clan`;
 INSERT INTO `clan` (`id`, `name`, `name_short`, `mems`, `level`, `exp`, `slogan`, `rule`, `notice`, `vang`, `kimcuong`, `max_mem`, `icon`, `item`, `time_item`) VALUES
@@ -459,16 +651,62 @@ INSERT INTO `clan` (`id`, `name`, `name_short`, `mems`, `level`, `exp`, `slogan`
 	(3, 'ThichVarCham', '24H', '[["haitac",127,0,0,0,11,3,62,[[11,10],[19,0],[19,2],[15,1]]],["youtube",122,0,0,0,11,3,58,[[11,10],[19,0],[3,2],[15,1]]],["locket",122,0,0,0,9,1,56,[[9,9],[17,0],[13,2],[21,1]]],["instargram",122,0,0,0,8,0,54,[[9,8],[16,0],[8,2],[16,1]]],["capcut",122,0,1,0,11,3,58,[[11,10],[11,0],[19,2],[19,1]]]]', 9, 19999, '', '', '', 4245001, 40, 10, 30, '[]', '[]'),
 	(4, 'Bất Bại', 'DST', '[["chienthan",127,0,0,0,8,20,67,[[11,8],[24,0],[24,2],[24,1]]],["darkness",126,0,0,0,9,1,66,[[11,9],[21,0],[21,2],[17,1]]],["takeru",122,30,100000,0,11,3,67,[[13,10],[19,0],[27,2],[27,1]]],["iuzwizhka",122,0,0,0,9,1,57,[[9,9],[17,0],[17,2],[13,1]]],["knifee",122,0,0,0,9,1,48,[[9,9],[17,0],[17,2],[17,1]]],["sontungmtp",122,0,0,0,9,0,52,[[7,8],[4,0],[16,2],[16,1]]],["satthuzz01",122,0,0,0,8,35,66,[[11,9],[21,0],[25,2],[21,1]]],["dat090",122,0,0,0,10,2,70,[[7,11],[22,0],[26,2],[14,1]]]]', 9, 19999, '', '', '', 100000, 30, 10, 3, '[]', '[]');
 
+-- Dumping structure for table hso.comments
+DROP TABLE IF EXISTS `comments`;
+CREATE TABLE IF NOT EXISTS `comments` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `post_id` int(11) NOT NULL,
+  `nguoidung` varchar(255) NOT NULL,
+  `traloi` text NOT NULL,
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `gender` int(11) NOT NULL,
+  `binhluan` int(11) NOT NULL DEFAULT '0',
+  `image` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE,
+  KEY `post_id` (`post_id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
+
 -- Dumping data for table hso.comments: ~0 rows (approximately)
 DELETE FROM `comments`;
 
--- Dumping data for table hso.config_server: ~1 rows (approximately)
+-- Dumping structure for table hso.config_server
+DROP TABLE IF EXISTS `config_server`;
+CREATE TABLE IF NOT EXISTS `config_server` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `king_battlefield` int(255) DEFAULT NULL,
+  `gold_offline` text,
+  `chiem_thanh` int(11) DEFAULT NULL,
+  `thue` int(11) DEFAULT '5',
+  `time_x2_server` bigint(20) DEFAULT '0',
+  `mo_ly` int(11) DEFAULT '0',
+  `thanh_tich` text,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+-- Dumping data for table hso.config_server: ~0 rows (approximately)
 DELETE FROM `config_server`;
 INSERT INTO `config_server` (`id`, `king_battlefield`, `gold_offline`, `chiem_thanh`, `thue`, `time_x2_server`, `mo_ly`, `thanh_tich`) VALUES
 	(1, 2, '{}', 0, 5, 0, 7465, '{}');
 
+-- Dumping structure for table hso.ctv_money
+DROP TABLE IF EXISTS `ctv_money`;
+CREATE TABLE IF NOT EXISTS `ctv_money` (
+  `username` varchar(255) DEFAULT NULL,
+  `sotien` int(11) DEFAULT NULL,
+  `status` varchar(255) DEFAULT NULL,
+  `createtime` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
 -- Dumping data for table hso.ctv_money: ~0 rows (approximately)
 DELETE FROM `ctv_money`;
+
+-- Dumping structure for table hso.event
+DROP TABLE IF EXISTS `event`;
+CREATE TABLE IF NOT EXISTS `event` (
+  `id` int(11) NOT NULL,
+  `data` text,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
 
 -- Dumping data for table hso.event: ~3 rows (approximately)
 DELETE FROM `event`;
@@ -476,6 +714,15 @@ INSERT INTO `event` (`id`, `data`) VALUES
 	(0, '{"receive":[],"register":[]}'),
 	(1, ''),
 	(2, '');
+
+-- Dumping structure for table hso.fashiontemplate
+DROP TABLE IF EXISTS `fashiontemplate`;
+CREATE TABLE IF NOT EXISTS `fashiontemplate` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `part` varchar(255) DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=4814 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 -- Dumping data for table hso.fashiontemplate: ~76 rows (approximately)
 DELETE FROM `fashiontemplate`;
@@ -557,32 +804,134 @@ INSERT INTO `fashiontemplate` (`id`, `part`, `name`) VALUES
 	(4812, '[130,130,125,-1,-1,55,-1]', 'Công chúa rồng'),
 	(4813, '[131,131,126,-1,-1,55,-1]', 'Thủ lĩnh rồng');
 
+-- Dumping structure for table hso.giftcode
+DROP TABLE IF EXISTS `giftcode`;
+CREATE TABLE IF NOT EXISTS `giftcode` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `giftname` varchar(255) DEFAULT NULL,
+  `item4` text,
+  `item7` text,
+  `vang` bigint(20) DEFAULT NULL,
+  `ngoc` int(11) DEFAULT NULL,
+  `empty_box` tinyint(4) NOT NULL,
+  `limit` int(11) DEFAULT NULL,
+  `gift_for` varchar(255) DEFAULT '',
+  `level` int(11) NOT NULL DEFAULT '0',
+  `needActive` tinyint(4) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE KEY `giftname` (`giftname`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+
 -- Dumping data for table hso.giftcode: ~2 rows (approximately)
 DELETE FROM `giftcode`;
 INSERT INTO `giftcode` (`id`, `giftname`, `item4`, `item7`, `vang`, `ngoc`, `empty_box`, `limit`, `gift_for`, `level`, `needActive`) VALUES
 	(1, 'open', '[]', '[]', NULL, 500, 1, 999, '', 0, 0),
 	(3, 'hpmpvip', '[[2,2000],[5,2000]]', '[]', NULL, NULL, 1, 999, '', 0, 0);
 
+-- Dumping structure for table hso.history_coin
+DROP TABLE IF EXISTS `history_coin`;
+CREATE TABLE IF NOT EXISTS `history_coin` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) DEFAULT NULL,
+  `user_name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `name_player` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `coin_change` int(11) DEFAULT NULL,
+  `logger` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `time` datetime DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
 -- Dumping data for table hso.history_coin: ~0 rows (approximately)
 DELETE FROM `history_coin`;
+
+-- Dumping structure for table hso.history_del_item
+DROP TABLE IF EXISTS `history_del_item`;
+CREATE TABLE IF NOT EXISTS `history_del_item` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name_player` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `item3` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '[]',
+  `item47` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '[]',
+  `logger` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- Dumping data for table hso.history_del_item: 0 rows
 DELETE FROM `history_del_item`;
 /*!40000 ALTER TABLE `history_del_item` DISABLE KEYS */;
 /*!40000 ALTER TABLE `history_del_item` ENABLE KEYS */;
 
+-- Dumping structure for table hso.history_doi_dai_bang
+DROP TABLE IF EXISTS `history_doi_dai_bang`;
+CREATE TABLE IF NOT EXISTS `history_doi_dai_bang` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user` varchar(50) DEFAULT NULL,
+  `name_player` varchar(50) DEFAULT NULL,
+  `last_point` int(11) NOT NULL,
+  `point_arena` int(11) NOT NULL,
+  `time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 -- Dumping data for table hso.history_doi_dai_bang: ~0 rows (approximately)
 DELETE FROM `history_doi_dai_bang`;
+
+-- Dumping structure for table hso.history_kmb2
+DROP TABLE IF EXISTS `history_kmb2`;
+CREATE TABLE IF NOT EXISTS `history_kmb2` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name_player_sell` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name_player_buy` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `last_gold_sell` bigint(20) NOT NULL,
+  `affter_gold_sell` bigint(20) NOT NULL,
+  `last_gold_buy` bigint(20) NOT NULL,
+  `affter_gold_buy` bigint(20) NOT NULL,
+  `item3` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '[]',
+  `item47` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '[]',
+  `time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `check` decimal(10,2) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- Dumping data for table hso.history_kmb2: 0 rows
 DELETE FROM `history_kmb2`;
 /*!40000 ALTER TABLE `history_kmb2` DISABLE KEYS */;
 /*!40000 ALTER TABLE `history_kmb2` ENABLE KEYS */;
 
+-- Dumping structure for table hso.history_vxmm
+DROP TABLE IF EXISTS `history_vxmm`;
+CREATE TABLE IF NOT EXISTS `history_vxmm` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name_player` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `monney_join` int(11) NOT NULL,
+  `money_round` bigint(20) NOT NULL,
+  `type_monney` tinyint(4) NOT NULL,
+  `last_monney` bigint(20) NOT NULL,
+  `monney` bigint(20) NOT NULL,
+  `logger` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `time` datetime DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 -- Dumping data for table hso.history_vxmm: ~0 rows (approximately)
 DELETE FROM `history_vxmm`;
 
--- Dumping data for table hso.item3: ~4,820 rows (approximately)
+-- Dumping structure for table hso.item3
+DROP TABLE IF EXISTS `item3`;
+CREATE TABLE IF NOT EXISTS `item3` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) DEFAULT NULL,
+  `type` tinyint(4) DEFAULT NULL,
+  `part` tinyint(4) DEFAULT NULL,
+  `clazz` tinyint(4) DEFAULT NULL,
+  `iconid` int(11) DEFAULT NULL,
+  `level` int(11) DEFAULT NULL,
+  `data` varchar(255) DEFAULT NULL,
+  `color` tinyint(4) DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=4820 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+
+-- Dumping data for table hso.item3: ~4,944 rows (approximately)
 DELETE FROM `item3`;
 INSERT INTO `item3` (`id`, `name`, `type`, `part`, `clazz`, `iconid`, `level`, `data`, `color`) VALUES
 	(0, 'Gươm đá', 8, 0, 0, 0, 1, '[[0,54],[40,120]]', 0),
@@ -5406,7 +5755,22 @@ INSERT INTO `item3` (`id`, `name`, `type`, `part`, `clazz`, `iconid`, `level`, `
 	(4818, 'giang vip', 27, 96, 4, 13173, 1, '[[7,2000],[8,2000],[9,2000],[10,2000],[11,2000],[27,500]]', 5),
 	(4819, 'Gươm đá', 8, 0, 0, 0, 1, '[[0,54],[40,120]]', 0);
 
--- Dumping data for table hso.item3_copy1: ~4,819 rows (approximately)
+-- Dumping structure for table hso.item3_copy1
+DROP TABLE IF EXISTS `item3_copy1`;
+CREATE TABLE IF NOT EXISTS `item3_copy1` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) DEFAULT NULL,
+  `type` tinyint(4) DEFAULT NULL,
+  `part` tinyint(4) DEFAULT NULL,
+  `clazz` tinyint(4) DEFAULT NULL,
+  `iconid` int(11) DEFAULT NULL,
+  `level` int(11) DEFAULT NULL,
+  `data` varchar(255) DEFAULT NULL,
+  `color` tinyint(4) DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=4820 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+
+-- Dumping data for table hso.item3_copy1: ~4,943 rows (approximately)
 DELETE FROM `item3_copy1`;
 INSERT INTO `item3_copy1` (`id`, `name`, `type`, `part`, `clazz`, `iconid`, `level`, `data`, `color`) VALUES
 	(1, 'Gươm đá', 8, 0, 0, 0, 1, '[[0,56],[40,124]]', 1),
@@ -10229,6 +10593,22 @@ INSERT INTO `item3_copy1` (`id`, `name`, `type`, `part`, `clazz`, `iconid`, `lev
 	(4818, 'giang vip', 27, 96, 4, 13173, 1, '[[7,2000],[8,2000],[9,2000],[10,2000],[11,2000],[27,500]]', 5),
 	(4819, 'Gươm đá', 8, 0, 0, 0, 1, '[[0,54],[40,120]]', 0);
 
+-- Dumping structure for table hso.item4
+DROP TABLE IF EXISTS `item4`;
+CREATE TABLE IF NOT EXISTS `item4` (
+  `id` int(11) NOT NULL,
+  `icon` int(11) DEFAULT NULL,
+  `price` bigint(20) DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `content` varchar(255) DEFAULT NULL,
+  `typepotion` tinyint(4) DEFAULT NULL,
+  `moneytype` tinyint(4) DEFAULT NULL,
+  `sell` tinyint(4) DEFAULT NULL,
+  `value` int(11) DEFAULT NULL,
+  `canTrade` tinyint(4) DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+
 -- Dumping data for table hso.item4: ~326 rows (approximately)
 DELETE FROM `item4`;
 INSERT INTO `item4` (`id`, `icon`, `price`, `name`, `content`, `typepotion`, `moneytype`, `sell`, `value`, `canTrade`) VALUES
@@ -10559,6 +10939,21 @@ INSERT INTO `item4` (`id`, `icon`, `price`, `name`, `content`, `typepotion`, `mo
 	(324, 263, 2000, 'Cá Chép x99', '-Tăng 10% phòng thủ - Tăng 10% sát thương - Tăng tốc độ di chuyển ', 44, 1, 0, 99, 0),
 	(325, 263, 2000, 'Cá Chép Vĩnh Viển', '-Tăng 10% phòng thủ - Tăng 10% sát thương - Tăng tốc độ di chuyển ', 44, 1, 0, 1, 0);
 
+-- Dumping structure for table hso.item5
+DROP TABLE IF EXISTS `item5`;
+CREATE TABLE IF NOT EXISTS `item5` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `type` tinyint(4) DEFAULT NULL,
+  `part` tinyint(4) DEFAULT NULL,
+  `clazz` tinyint(4) DEFAULT NULL,
+  `iconid` int(11) DEFAULT NULL,
+  `level` int(11) DEFAULT NULL,
+  `data` varchar(255) DEFAULT NULL,
+  `color` tinyint(4) DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+
 -- Dumping data for table hso.item5: ~33 rows (approximately)
 DELETE FROM `item5`;
 INSERT INTO `item5` (`id`, `name`, `type`, `part`, `clazz`, `iconid`, `level`, `data`, `color`) VALUES
@@ -10595,6 +10990,23 @@ INSERT INTO `item5` (`id`, `name`, `type`, `part`, `clazz`, `iconid`, `level`, `
 	(30, 'Lọ mực', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 	(31, 'Mảnh bản đồ', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 	(32, 'Lọ thuốc thần', NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+
+-- Dumping structure for table hso.item7
+DROP TABLE IF EXISTS `item7`;
+CREATE TABLE IF NOT EXISTS `item7` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `imgid` int(11) DEFAULT NULL,
+  `price` bigint(20) DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `content` varchar(1000) DEFAULT NULL,
+  `type` tinyint(4) DEFAULT NULL,
+  `pricetype` tinyint(4) DEFAULT NULL,
+  `sell` tinyint(4) DEFAULT NULL,
+  `value` int(11) DEFAULT NULL,
+  `trade` tinyint(4) DEFAULT NULL,
+  `setcolorname` tinyint(4) DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=494 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 -- Dumping data for table hso.item7: ~494 rows (approximately)
 DELETE FROM `item7`;
@@ -11094,6 +11506,16 @@ INSERT INTO `item7` (`id`, `imgid`, `price`, `name`, `content`, `type`, `pricety
 	(492, 491, 40000, 'Hồ quang vàng cấp 3', 'Nguyên liệu nâng cấp giáp siêu nhân vàng cấp 8-10', 83, 1, 0, 1, 0, 0),
 	(493, 486, 40000, 'Đá hỏa tinh cấp 2', 'Không tụt độ bền đồ tinh tú khi nâng cấp.- Tăng 10% thành công', 79, 1, 0, 1, 0, 0);
 
+-- Dumping structure for table hso.itemoption
+DROP TABLE IF EXISTS `itemoption`;
+CREATE TABLE IF NOT EXISTS `itemoption` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(500) DEFAULT NULL,
+  `colorInfoItem` tinyint(4) DEFAULT NULL,
+  `isPercentInfoItem` tinyint(4) DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=191 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+
 -- Dumping data for table hso.itemoption: ~191 rows (approximately)
 DELETE FROM `itemoption`;
 INSERT INTO `itemoption` (`id`, `name`, `colorInfoItem`, `isPercentInfoItem`) VALUES
@@ -11289,6 +11711,15 @@ INSERT INTO `itemoption` (`id`, `name`, `colorInfoItem`, `isPercentInfoItem`) VA
 	(189, 'Áo giáp lửa', 6, 1),
 	(190, 'Đặt trứng vào chuồng thú để ấp', 1, 0);
 
+-- Dumping structure for table hso.itemsell
+DROP TABLE IF EXISTS `itemsell`;
+CREATE TABLE IF NOT EXISTS `itemsell` (
+  `id` int(11) NOT NULL,
+  `namenpc` varchar(255) DEFAULT NULL,
+  `data` varchar(3000) DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+
 -- Dumping data for table hso.itemsell: ~20 rows (approximately)
 DELETE FROM `itemsell`;
 INSERT INTO `itemsell` (`id`, `namenpc`, `data`) VALUES
@@ -11313,10 +11744,34 @@ INSERT INTO `itemsell` (`id`, `namenpc`, `data`) VALUES
 	(18, 'shopegg', '[2943, 2944]'),
 	(19, 'shopclan', '[19, 20, 146, 159, 160, 161, 163, 228, 229, 230, 231, 232, 233, 234]');
 
--- Dumping data for table hso.king_cup: ~1 rows (approximately)
+-- Dumping structure for table hso.king_cup
+DROP TABLE IF EXISTS `king_cup`;
+CREATE TABLE IF NOT EXISTS `king_cup` (
+  `group_65_74` longtext CHARACTER SET utf8 NOT NULL,
+  `group_75_84` longtext CHARACTER SET utf8 NOT NULL,
+  `group_85_94` longtext CHARACTER SET utf8 NOT NULL,
+  `group_95_104` longtext CHARACTER SET utf8 NOT NULL,
+  `group_105_114` longtext CHARACTER SET utf8 NOT NULL,
+  `group_115_124` longtext CHARACTER SET utf8 NOT NULL,
+  `group_125_139` longtext CHARACTER SET utf8 NOT NULL,
+  `turn_king_cup` smallint(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Dumping data for table hso.king_cup: ~0 rows (approximately)
 DELETE FROM `king_cup`;
 INSERT INTO `king_cup` (`group_65_74`, `group_75_84`, `group_85_94`, `group_95_104`, `group_105_114`, `group_115_124`, `group_125_139`, `turn_king_cup`) VALUES
 	('["mrcong","giangg"]', '[]', '[]', '[]', '[]', '[]', '[]', 2);
+
+-- Dumping structure for table hso.level
+DROP TABLE IF EXISTS `level`;
+CREATE TABLE IF NOT EXISTS `level` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `level` varchar(255) DEFAULT NULL,
+  `exp` bigint(20) DEFAULT NULL,
+  `tiemnang` int(11) DEFAULT NULL,
+  `kynang` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=141 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 -- Dumping data for table hso.level: ~140 rows (approximately)
 DELETE FROM `level`;
@@ -11462,16 +11917,59 @@ INSERT INTO `level` (`id`, `level`, `exp`, `tiemnang`, `kynang`) VALUES
 	(139, '139', 21000000000000000, 5, 1),
 	(140, '140', 9223372036854775807, 5, 1);
 
+-- Dumping structure for table hso.listcomment
+DROP TABLE IF EXISTS `listcomment`;
+CREATE TABLE IF NOT EXISTS `listcomment` (
+  `id` int(11) NOT NULL,
+  `userId` int(11) NOT NULL,
+  `code` varchar(255) COLLATE utf8_vietnamese_ci NOT NULL,
+  `content` longtext COLLATE utf8_vietnamese_ci NOT NULL,
+  `like` text COLLATE utf8_vietnamese_ci NOT NULL,
+  `time` int(11) NOT NULL,
+  `created_at` varchar(255) COLLATE utf8_vietnamese_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_vietnamese_ci;
+
 -- Dumping data for table hso.listcomment: ~2 rows (approximately)
 DELETE FROM `listcomment`;
 INSERT INTO `listcomment` (`id`, `userId`, `code`, `content`, `like`, `time`, `created_at`) VALUES
 	(0, 1, 'B40eB1z9RHPO', '<p>Góp ý nhé anh em!</p>', 'admin,', 1705376616, '10:43:36 16/01/2024'),
 	(0, 1, 'V6AIkyxsrhUx', '<p>Tài khoản test sẽ giữ lại sau khi test nhé, chỉ cần lúc open kích hoạt là được.</p>', 'admin,', 1710034367, '08:32:47 10/03/2024');
 
--- Dumping data for table hso.main: ~1 rows (approximately)
+-- Dumping structure for table hso.main
+DROP TABLE IF EXISTS `main`;
+CREATE TABLE IF NOT EXISTS `main` (
+  `code` varchar(50) DEFAULT NULL,
+  `author` varchar(50) DEFAULT NULL,
+  `userId` int(11) DEFAULT NULL,
+  `title` varchar(50) DEFAULT NULL,
+  `content` text,
+  `lock` tinyint(4) DEFAULT NULL,
+  `important` tinyint(4) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- Dumping data for table hso.main: ~0 rows (approximately)
 DELETE FROM `main`;
 INSERT INTO `main` (`code`, `author`, `userId`, `title`, `content`, `lock`, `important`) VALUES
 	('fgfdgdfghdf', 'admin', 1, 'Test', '<p><font style="background-color: rgb(255, 255, 255);" color="#0000ff"><b style="">Điểm danh vọng có thể kiếm bằng cách như sau :</b></font></p><p>- Tiêu diệt quái chênh lệch 9 level. Cách tính điểm như sau: <span style="background-color: rgb(255, 255, 0);">10 + level quái - level nhân vật</span></p><p>- Tiêu diệt 1 con boss thế giới bạn nhận được 500 điểm danh vọng.</p><p>- Trở thành vua chiến trường bạn nhân được 1000 điểm danh vọng.</p><p>- Là người trong bang giữ đá cuối cùng trong chiếm thành được 1000 điểm danh vọng.</p><p><b><font color="#ff0000" style="background-color: rgb(255, 255, 255);"><u>Lưu ý :</u>&nbsp;Nếu bạn bị chết bằng bất kỳ lý do nào bạn sẽ bị trừ 10 điểm danh vọng. ( Phải trên 1000 điểm danh vọng mới bị trừ nhé)</font></b></p>', 1, 0);
+
+-- Dumping structure for table hso.maps
+DROP TABLE IF EXISTS `maps`;
+CREATE TABLE IF NOT EXISTS `maps` (
+  `id` smallint(4) NOT NULL,
+  `name` varchar(100) DEFAULT NULL,
+  `type` tinyint(4) DEFAULT NULL,
+  `ismaplang` tinyint(4) DEFAULT NULL,
+  `showhs` tinyint(4) DEFAULT NULL,
+  `maxzone` tinyint(4) DEFAULT NULL,
+  `maxplayer` tinyint(4) DEFAULT NULL,
+  `vgos` varchar(1000) DEFAULT NULL,
+  `mobs` varchar(3000) DEFAULT NULL,
+  `npc_0` varchar(255) DEFAULT '[]',
+  `npc_1` varchar(5000) DEFAULT '[]',
+  `npc_2` varchar(255) DEFAULT '[]',
+  `npc_3` varchar(255) DEFAULT '[]',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 -- Dumping data for table hso.maps: ~108 rows (approximately)
 DELETE FROM `maps`;
@@ -11584,6 +12082,14 @@ INSERT INTO `maps` (`id`, `name`, `type`, `ismaplang`, `showhs`, `maxzone`, `max
 	(129, 'Map 12x', 0, 0, 0, 1, 15, '[]', '[[217,264,408],\n[217,240,360],\n[217,264,192],\n[217,168,360],\n[217,168,264],\n[217,120,192],\n[217,268,175],\n[217,192,336],\n[217,268,199],\n[217,292,168],\n[217,264,175],\n[218,720,696],\n[217,336,144],\n[217,312,72],\n[217,144,240],\n[217,360,432],\n[217,264,456],\n[217,192,552],\n[217,360,528],\n[217,168,552],\n[217,288,528],\n[217,312,480],\n[217,72,624],\n[217,120,648],\n[217,120,720],\n[216,624,744],\n[216,744,720],\n[216,696,576],\n[216,672,648],\n[216,648,696],\n[216,720,672],\n[216,888,696],\n[216,912,648],\n[216,960,600],\n[216,1008,624],\n[216,1056,600],\n[216,1080,648],\n[216,1080,600],\n[216,1056,672],\n[216,1056,672],\n[216,1056,552],\n[216,888,336],\n[216,968,123],\n[216,968,123],\n[216,960,131],\n[216,968,131],\n[216,968,96],\n[216,816,216],\n[216,840,168],\n[216,792,312],\n[216,744,144],\n[216,792,48],\n[216,792,288]\n]', '[[-104,354,228]]', '[]', '[]', '[]'),
 	(132, 'Map 13x', 0, 0, 0, 1, 15, '[]', '[[210,96,192],\n[210,408,144],\n[210,384,240],\n[210,72,240],\n[210,240,288],\n[210,384,264],\n[210,72,288],\n[210,336,240],\n[210,240,264],\n[210,96,312],\n[210,264,240],\n[210,288,192],\n[210,0,936],\n[210,312,912],\n[210,360,960],\n[210,408,960],\n[210,384,984],\n[210,432,984],\n[210,240,1008],\n[210,408,1008],\n[210,408,1032],\n[210,96,1032],\n[210,144,1032],\n[210,384,1056],\n[210,120,1080],\n[210,144,1104],\n[210,144,1152],\n[210,72,1152],\n[210,480,960],\n[210,432,1080],\n[210,552,1056],\n[210,456,1032],\n[210,552,1152],\n[210,576,1080],\n[210,576,1056],\n[210,600,1032],\n[210,648,1080],\n[210,648,1128],\n[212,720,936],\n[212,792,912],\n[212,902,845],\n[212,792,840],\n[212,936,845],\n[212,1008,984],\n[212,960,816],\n[212,792,792],\n[212,720,792],\n[212,888,888],\n[212,960,888],\n[212,984,552],\n[212,1080,432],\n[212,984,456],\n[212,936,480],\n[212,960,504],\n[212,768,312],\n[212,792,144],\n[212,744,168],\n[212,744,216],\n[212,792,72],\n[212,720,168],\n[212,672,336],\n[212,648,432],\n[212,648,264],\n[212,624,288],\n[212,600,408],\n[212,600,336],\n[212,552,456],\n[212,552,384],\n[212,861,816],\n[212,864,600],\n[212,912,864],\n[212,720,936],\n[212,871,861],\n[212,864,864],\n[212,840,792],\n[212,744,744],\n[212,936,792],\n[212,864,768],\n[212,888,816]\n]', '[[-104,264,168]]', '[]', '[]', '[]'),
 	(135, 'Làng phủ sương', 0, 1, 0, 1, 15, '[]', '[]', '[[-99,528,276],[-100,504,96],[-101,720,192],[-103,672,96],[-102,408,180],[-104,720,336]]', '[[-43,648,264]]', '[]', '[]');
+
+-- Dumping structure for table hso.map_data
+DROP TABLE IF EXISTS `map_data`;
+CREATE TABLE IF NOT EXISTS `map_data` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 -- Dumping data for table hso.map_data: ~124 rows (approximately)
 DELETE FROM `map_data`;
@@ -11713,6 +12219,15 @@ INSERT INTO `map_data` (`id`, `name`) VALUES
 	(122, 'Đảo đầu lâu'),
 	(123, 'Đảo Marshall');
 
+-- Dumping structure for table hso.mconfig
+DROP TABLE IF EXISTS `mconfig`;
+CREATE TABLE IF NOT EXISTS `mconfig` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) NOT NULL,
+  `data` text CHARACTER SET utf8 NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=20 DEFAULT CHARSET=latin1;
+
 -- Dumping data for table hso.mconfig: 19 rows
 DELETE FROM `mconfig`;
 /*!40000 ALTER TABLE `mconfig` DISABLE KEYS */;
@@ -11738,6 +12253,15 @@ INSERT INTO `mconfig` (`id`, `name`, `data`) VALUES
 	(19, 'ratio_vang', '40000');
 /*!40000 ALTER TABLE `mconfig` ENABLE KEYS */;
 
+-- Dumping structure for table hso.messager
+DROP TABLE IF EXISTS `messager`;
+CREATE TABLE IF NOT EXISTS `messager` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `tile` text COLLATE utf8_unicode_ci NOT NULL,
+  `content` longtext COLLATE utf8_unicode_ci,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=61 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
 -- Dumping data for table hso.messager: ~9 rows (approximately)
 DELETE FROM `messager`;
 INSERT INTO `messager` (`id`, `tile`, `content`) VALUES
@@ -11750,6 +12274,18 @@ INSERT INTO `messager` (`id`, `tile`, `content`) VALUES
 	(58, 'COIN DÙNG ĐỂ LÀM GÌ', '<p><span style="background-color: #bfedd2;">coin hiện tại d&ugrave;ng để k&iacute;ch hoạt th&agrave;nh vi&ecirc;n.</span></p>\r\n<p><span style="background-color: #bfedd2;">ngo&agrave;i ra c&oacute; thể v&agrave;o zulu để quy đổi ra v&agrave;ng v&agrave; ngọc.</span></p>\r\n<p><span style="background-color: #f8cac6;">Sau n&agrave;y game sẽ update th&ecirc;m c&aacute;c hoạt động b&ecirc;n ngo&agrave;i để c&oacute; thể d&ugrave;ng đến ch&uacute;ng</span></p>'),
 	(59, 'SỰ KIỆN VU LAN', '<div class="box_ndung_bviet"><center><img src="http://my.teamobi.com/app/view/forum/16594960179349.png" /></center><br /><br /><center><span style="color: red;">B&Oacute; HOA VU LAN</span></center><br /><br />- Trong thời gian diễn ra sự kiện vu lan . Tất cả hiệp sĩ h&atilde;y c&ugrave;ng nhau thu thập những b&ocirc;ng sen trắng <img src="http://my.teamobi.com/app/view/forum/16594932482829.png" /> rồi đem đến NPC Miss Sophia để đổi những b&oacute; hoa nh&eacute;<br /><br />- C&aacute;c hoạt động sẽ rơi b&ocirc;ng sen trắng <br /><br />1. Đ&aacute;nh qu&aacute;i +- 5 level<br />2. <span style="color: #626262;">Đ&aacute;nh qu&aacute;i trong</span> ph&oacute; bản&nbsp;</div>\r\n<div class="box_ndung_bviet">3.&nbsp;<span style="color: #626262;">Đ&aacute;nh qu&aacute;i level 133 trờ l&ecirc;n</span><br />- Khi c&aacute;c bạn thu thập đủ b&ocirc;ng sen trắng <img src="http://my.teamobi.com/app/view/forum/16594932482829.png" /> c&oacute; thể đổi lấy th&agrave;nh b&oacute; hoa trắng <img src="http://my.teamobi.com/app/view/forum/16594932488707.png" /> c&ocirc;ng thức :<br /><br />30 b&ocirc;ng sen trắng <img src="http://my.teamobi.com/app/view/forum/16594932482829.png" /> + v&agrave;ng = 1 b&oacute; sen trắng <img src="http://my.teamobi.com/app/view/forum/16594932488707.png" /><br /><br />- D&ugrave;ng b&oacute; hoa trắng sẽ ngẫu nhi&ecirc;n nhận được vật phẩm sau :<br /><br />Kẹo bạc h&agrave; <br />Kẹo hương cam<br />Kẹo the<br />Kẹo sữa<br />Rương đỏ<br />Rương t&iacute;m<br />Titan<br />Sắt vụn<br />Cỏ ba l&aacute; <br />Kim loại vũ trụ<br />L&ocirc;ng xanh<br />L&ocirc;ng đỏ<br />L&ocirc;ng v&agrave;ng<br />Nl tinh t&uacute;&nbsp;<br />Hồi sinh tại chỗ<br />200-300 B&igrave;nh HP 6.000<br />200-300 B&igrave;nh MP 600<br />Nước rửa tội<br />V&eacute; mở ly&nbsp;<br />M&acirc;y<br />B&ograve; v&agrave;ng<br />S&aacute;ch tri thức<br /><br /><br />Lưu &yacute; : <br />- H&agrave;nh trang đầy sẽ mất qu&agrave; admin kh&ocirc;ng chịu tr&aacute;ch nhiệm<br />- Lồng đ&egrave;n sao hồng b&aacute;n bằng v&agrave;ng trong Lisa , thời gian sử dụng l&agrave; 1 tiếng v&agrave; loại 10 tiếng . Kh&ocirc;ng thể sử dụng cộng dồn. V&agrave; khi th&aacute;o lồng đ&egrave;n l&agrave; sẽ mất lu&ocirc;n<br />- Max nhập số lượng đổi 1 lần l&agrave; 200<br /><br /><center><span style="color: red;">B&Oacute; HOA SEN HỒNG</span></center><br /><br />- C&oacute; thể đổi b&ocirc;ng sen trắng th&agrave;nh b&ocirc;ng sen hồng theo c&ocirc;ng thức<br /><br />10 b&ocirc;ng sen trắng <img src="http://my.teamobi.com/app/view/forum/16594932482829.png" /> + v&agrave;ng = 1 b&ocirc;ng sen hồng <img src="http://my.teamobi.com/app/view/forum/16594932485118.png" /> <br /><br />5 b&ocirc;ng sen hồng <img src="http://my.teamobi.com/app/view/forum/16594932485118.png" /> + ngọc = 1 b&oacute; sen hồng <img src="http://my.teamobi.com/app/view/forum/16594941922226.png" /><br /><br />- Khi sử dụng b&oacute; sen hồng <img src="http://my.teamobi.com/app/view/forum/16594941922226.png" /> nhận được ngẫu nhi&ecirc;n<br /><br />Ngẫu nhi&ecirc;n v&agrave;ng<br />Rương v&agrave;ng<br />V&eacute; x2 đi bu&ocirc;n<br />Cỏ 4 l&aacute;<br />Cỏ 3 l&aacute;<br />Hỏa ỳ l&acirc;n<br />M&acirc;y<br />Đ&aacute; ba m&agrave;u<br />V&eacute; mở ly<br />V&eacute; tự động đ&aacute;nh<br />Đ&aacute; hỏa tinh<br />nltt ngẫu nhi&ecirc;u<br />Nguy&ecirc;n liệu mề đay v&agrave;ng/t&iacute;m cấp 1 ngẫu nhi&ecirc;n<br />Th&aacute;nh gi&aacute;<br />Xương<br />Đục huyền b&iacute; cấp 1<br />Đ&aacute; thạch anh cấp 1<br /><span style="color: #626262;">S&aacute;ch skill 110 kh&ocirc;ng kh&oacute;a</span><br /><br /><br />Lưu &yacute; : <br />- H&agrave;nh trang đầy sẽ mất qu&agrave; admin kh&ocirc;ng chịu tr&aacute;ch nhiệm<br />- Max nhập số lượng đổi 1 lần l&agrave; 200<br /><br /><center><span style="color: red;">ƯỚC NGUYỆN C&Ugrave;NG BẠN</span></center><br /><center><img src="http://my.teamobi.com/app/view/forum/16594941925168.png" /></center><br /><br /><img src="http://my.teamobi.com/app/view/forum/16594949977250.png" /> Hoa đăng b&aacute;n ở cửa h&agrave;ng Lisa/Emma. Hiệp sĩ khi sử dụng hoa đăng nhập t&ecirc;n nh&acirc;n vật kh&aacute;c để c&ugrave;ng nhau ước nguyện nhận qu&agrave; tặng. Cả người tặng v&agrave; người được tặng đều c&oacute; qu&agrave;.<br />- Phần qu&agrave; ước nguyện hoa đăng ngẫu nhi&ecirc;n :<br /><br /><br />Rương v&agrave;ng<br />V&eacute; x2 đi bu&ocirc;n <br />Cỏ 4 l&aacute;<br />Cỏ 3 l&aacute;<br />Hỏa kỳ l&acirc;n<br />M&acirc;y<br />Đ&aacute; ba m&agrave;u<br />V&eacute; mở ly<br />V&eacute; tự động đ&aacute;nh <br />Đ&aacute; hỏa tinh<br />NLTT ngẫu nhi&ecirc;n<br />Nguy&ecirc;n liệu mề đay v&agrave;ng/t&iacute;m cấp 1 ngẫu nhi&ecirc;n<br />Th&aacute;nh gi&aacute;<br />Xương<br />Đục huyền b&iacute; cấp 1<br />Đ&aacute; thạch anh cấp 1<br />Kim loại vũ trụ<br />Đ&aacute; may mắn<br />L&ocirc;ng xanh/đỏ/v&agrave;ng<br />Tăng tốc c&aacute;nh cấp 1<br />B&ocirc;ng sen trắng/hồng<br />S&aacute;ch skill 110 kh&ocirc;ng kh&oacute;a<br /><br /><br />Lưu &yacute; : <br />- H&agrave;nh trang đầy sẽ mất qu&agrave; admin kh&ocirc;ng chịu tr&aacute;ch nhiệm<br />- Max nhập số lượng đổi 1 lần l&agrave; 200<br />- Người tặng v&agrave; được tặng phải đứng gần nhau nh&eacute;<br /><br /><center><span style="color: red;">ĐUA TOP HOA ĐĂNG</span></center><br /><br />Top 1 :<br />1 d&acirc;y chuyền mặt trăng vĩnh viễn kh&ocirc;ng kh&oacute;a [được tặng]<br />1 trứng pet rồng lửa vĩnh viễn [được tặng]<br />1 c&aacute;nh thời trang vĩnh viễn ngẫu nhi&ecirc;n<br />5 đ&aacute; krypton cấp 2<br /><br />Top 2 :<br />1 nhẫn mặt trăng vĩnh viễn [được tặng]<br />1 trứng pet rồng lửa vĩnh viễn [được chọn nh&acirc;n vật tặng]<br />1 c&aacute;nh thời trang 6 th&aacute;ng&nbsp;<span style="color: #626262;">ngẫu nhi&ecirc;n</span><br />3 đ&aacute; krypton cấp 1<br /><br />Top 3 :<br />1 nhẫn mặt trăng vĩnh viễn [được tặng]<br />1 trứng pet rồng lửa 6 th&aacute;ng&nbsp;<br /><span style="color: #626262;">1 c&aacute;nh thời trang 6 th&aacute;ng&nbsp;</span><span style="color: #626262;">ngẫu nhi&ecirc;n</span><br />2 đ&aacute; krypton cấp 1<br /><br />Top 4-10<br />1 tai nghe xanh/đỏ vĩnh viễn [tự chọn]<br />1 trứng pet rồng lửa 6 th&aacute;ng<br /><span style="color: #626262;">1 c&aacute;nh thời trang 2 th&aacute;ng </span><span style="color: #626262;">ngẫu nhi&ecirc;n</span><br /><br /><br />Lưu &yacute; :</div>\r\n<div class="box_ndung_bviet">- <span style="background-color: #f8cac6;">Đ&Egrave;N HOA ĐĂNG C&Oacute; GI&Aacute; 1TR V&Agrave;NG</span></div>\r\n<div class="box_ndung_bviet">- TOP KH&Ocirc;NG T&Iacute;NH ĐỒNG HẠNG [NGƯỜI N&Agrave;O ĐẠT SỐ LƯỢNG Đ&Oacute; TRƯỚC XẾP TRƯỚC LẤY TRƯỚC]<br />- Tối thiểu top phải đạt số lượng &gt; 3.000. Ri&ecirc;ng top 1-2-3 phải tối thiểu &gt; 5.000<br /><br /><center><span style="color: red;">ĐỔI QU&Agrave; ĐẶC BIỆT</span></center><br /><br />50 b&ocirc;ng sen hồng + 200ngọc = 1 t<span style="color: #444444; font-family: sans-serif; font-size: 13.12px; white-space-collapse: preserve; background-color: #ffffff;">rứng khỉ n&acirc;u</span>&nbsp;[thời hạn 15 ng&agrave;y]<br />50 b&ocirc;ng sen hồng + 200ngọc = 1 trứng tiểu y&ecirc;u tinh [thời hạn 15 ng&agrave;y]<br />50 b&ocirc;ng sen hồng + 500ngọc = 1 c<span style="background-color: #ffffff; color: #000000; font-family: sans-serif; font-size: 13.12px; white-space-collapse: preserve;">&aacute;nh l&ocirc;ng vũ thời trang</span>&nbsp;[thời hạn 30 ng&agrave;y]</div>\r\n<div class="box_ndung_bviet">10 b&ocirc;ng sen hồng + 100ngọc = 100 th&uacute; cưỡi con l&acirc;n<br /><br /><br />Lưu &yacute;<br />Trứng c&oacute; thời hạn như trang bị, kể cả kh&ocirc;ng ấp vẫn hết hạn b&igrave;nh thường<br /><br /><br /><strong>Thời gian diễn ra v&agrave; kết th&uacute;c sự kiện sẽ được BQT th&ocirc;ng b&aacute;o sau<br /></strong><br /><center></center></div>'),
 	(60, 'QUÀ TOP NẠP SK VULAN', '<p>Top 1:</p>\r\n<p>Gi&aacute;p Hellwing vĩnh viễn&nbsp;</p>\r\n<p>D&acirc;y chuyền mặt trăng vĩnh viễn</p>\r\n<p>Gậy mặt trăng vĩnh viễn</p>\r\n<p>Th&uacute; cưỡi C&acirc;n đẩu v&acirc;n vĩnh viễn</p>\r\n<p>&Aacute;o cho&agrave;ng tỷ ph&uacute; vĩnh viễn&nbsp;</p>\r\n<p>Khẩu trang đỏ vĩnh viễn&nbsp;</p>\r\n<p>Tai nghe vĩnh viễn&nbsp;</p>\r\n<p>100 nguy&ecirc;n liệu v&agrave;ng c3 ( ramdom)&nbsp;</p>\r\n<p>100 nguy&ecirc;n liệu t&iacute;m c3</p>\r\n<p>40 đ&aacute; hỏa tinh&nbsp;</p>\r\n<p>40 đ&aacute; kryton c3&nbsp;</p>\r\n<p>30 đ&aacute; 3 m&agrave;u</p>\r\n<p>Top 2:</p>\r\n<p>Gi&aacute;p Deathwing vĩnh viễn&nbsp;</p>\r\n<p>Gậy mặt trăng 30 ng&agrave;y</p>\r\n<p>Nhẫn mặt trăng vĩnh viễn</p>\r\n<p>Th&uacute; cưỡi Ngựa Skeleton vĩnh viễn</p>\r\n<p>&Aacute;o cho&agrave;ng triệu ph&uacute; vĩnh viễn&nbsp;</p>\r\n<p>Khẩu trang đỏ vĩnh viễn&nbsp;</p>\r\n<p>50 nguy&ecirc;n liệu v&agrave;ng c3 ( ramdom)&nbsp;</p>\r\n<p>50 nguy&ecirc;n liệu t&iacute;m c3</p>\r\n<p>15 đ&aacute; hỏa tinh&nbsp;</p>\r\n<p>15 đ&aacute; kryton c3&nbsp;</p>\r\n<p>20 đ&aacute; 3 m&agrave;u</p>\r\n<p>Top 3:</p>\r\n<p>Gi&aacute;p Deathwing vĩnh viễn&nbsp;</p>\r\n<p>Th&uacute; cưỡi Rồng băng vĩnh viễn</p>\r\n<p>&Aacute;o cho&agrave;ng đại gia vĩnh viễn&nbsp;</p>\r\n<p>Khẩu trang đỏ vĩnh viễn&nbsp;</p>\r\n<p>25 nguy&ecirc;n liệu v&agrave;ng c3 ( ramdom)&nbsp;</p>\r\n<p>25 nguy&ecirc;n liệu t&iacute;m c3</p>\r\n<p>10 đ&aacute; hỏa tinh&nbsp;</p>\r\n<p>10 đ&aacute; kryton c3&nbsp;</p>\r\n<p>15 đ&aacute; 3 m&agrave;u</p>\r\n<p>Top 4 &ndash; 10:</p>\r\n<p>Gi&aacute;p Xương kh&ocirc; vĩnh viễn</p>\r\n<p>Th&uacute; cưỡi Ngựa skeleton x99</p>\r\n<p>10 nguy&ecirc;n liệu v&agrave;ng c3 ( ramdom)&nbsp;</p>\r\n<p>10 nguy&ecirc;n liệu t&iacute;m c3</p>\r\n<p>7 đ&aacute; hỏa tinh&nbsp;</p>\r\n<p>7 đ&aacute; kryton c3&nbsp;</p>\r\n<p>10 đ&aacute; 3 m&agrave;u&nbsp;</p>\r\n<p>Lưu &yacute;; T<span style="color: #626262; background-color: #f8cac6;">op 1 2 3 phải nạp từ 2tr coin trở l&ecirc;n mới nhận được t&iacute;nh, nếu kh&ocirc;ng sẽ nhận qu&agrave; như top 4-10</span></p>\r\n<p>Sk đua top nạp kết th&uacute;c 23 :59 27/8</p>');
+
+-- Dumping structure for table hso.mobs
+DROP TABLE IF EXISTS `mobs`;
+CREATE TABLE IF NOT EXISTS `mobs` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
+  `level` int(11) DEFAULT NULL,
+  `hp` int(11) DEFAULT NULL,
+  `typemove` tinyint(4) DEFAULT NULL,
+  `is_boss` tinyint(4) DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
 
 -- Dumping data for table hso.mobs: ~219 rows (approximately)
 DELETE FROM `mobs`;
@@ -11974,6 +12510,18 @@ INSERT INTO `mobs` (`id`, `name`, `level`, `hp`, `typemove`, `is_boss`) VALUES
 	(217, 'Hoa ngủ gật', 125, 1100000, 0, 0),
 	(218, 'Mèo mập', 124, 199300, 0, 1);
 
+-- Dumping structure for table hso.mobs_copy1
+DROP TABLE IF EXISTS `mobs_copy1`;
+CREATE TABLE IF NOT EXISTS `mobs_copy1` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
+  `level` int(11) DEFAULT NULL,
+  `hp` int(11) DEFAULT NULL,
+  `typemove` tinyint(4) DEFAULT NULL,
+  `is_boss` tinyint(4) DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
+
 -- Dumping data for table hso.mobs_copy1: ~219 rows (approximately)
 DELETE FROM `mobs_copy1`;
 INSERT INTO `mobs_copy1` (`id`, `name`, `level`, `hp`, `typemove`, `is_boss`) VALUES
@@ -12197,8 +12745,35 @@ INSERT INTO `mobs_copy1` (`id`, `name`, `level`, `hp`, `typemove`, `is_boss`) VA
 	(217, 'Hoa ngủ gật', 125, 225400, 0, 0),
 	(218, 'Mèo mập', 124, 199300, 0, 1);
 
+-- Dumping structure for table hso.momo
+DROP TABLE IF EXISTS `momo`;
+CREATE TABLE IF NOT EXISTS `momo` (
+  `id` int(11) NOT NULL,
+  `tranId` varchar(255) NOT NULL,
+  `userID` int(11) NOT NULL,
+  `comment` varchar(255) NOT NULL,
+  `partnerId` varchar(255) NOT NULL,
+  `partnerName` text CHARACTER SET utf8 COLLATE utf8_vietnamese_ci NOT NULL,
+  `amount` int(11) NOT NULL,
+  `time` int(11) NOT NULL,
+  `created_at` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
 -- Dumping data for table hso.momo: ~0 rows (approximately)
 DELETE FROM `momo`;
+
+-- Dumping structure for table hso.napatm
+DROP TABLE IF EXISTS `napatm`;
+CREATE TABLE IF NOT EXISTS `napatm` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(250) DEFAULT NULL,
+  `hinhthuc` varchar(250) DEFAULT NULL,
+  `magd` varchar(250) DEFAULT NULL,
+  `sotien` varchar(250) DEFAULT NULL,
+  `ndnaptien` varchar(250) DEFAULT NULL,
+  `thoigian` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=utf8;
 
 -- Dumping data for table hso.napatm: ~42 rows (approximately)
 DELETE FROM `napatm`;
@@ -12246,14 +12821,79 @@ INSERT INTO `napatm` (`id`, `username`, `hinhthuc`, `magd`, `sotien`, `ndnaptien
 	(41, 'bossllss3', 'ACB', 'FT25311263784653', '10000', 'CUSTOMER hso363 FT25311906357407   Ma giao d ich  Trace229523 Trace 229523', '2025-11-07 17:42:18'),
 	(42, 'bossllss3', 'ACB', 'FT25311050255160', '10000', 'CUSTOMER hso363 FT25311729350140   Ma giao d ich  Trace672465 Trace 672465', '2025-11-07 18:45:38');
 
+-- Dumping structure for table hso.napcard
+DROP TABLE IF EXISTS `napcard`;
+CREATE TABLE IF NOT EXISTS `napcard` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(250) DEFAULT NULL,
+  `loaithe` varchar(250) DEFAULT NULL,
+  `menhgia` varchar(250) DEFAULT NULL,
+  `pin` varchar(250) DEFAULT NULL,
+  `seri` varchar(250) DEFAULT NULL,
+  `thucnhan` varchar(250) NOT NULL,
+  `requestid` varchar(250) DEFAULT NULL,
+  `status` int(250) DEFAULT NULL,
+  `thoigian` datetime DEFAULT NULL,
+  `note` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 -- Dumping data for table hso.napcard: ~0 rows (approximately)
 DELETE FROM `napcard`;
+
+-- Dumping structure for table hso.naptien
+DROP TABLE IF EXISTS `naptien`;
+CREATE TABLE IF NOT EXISTS `naptien` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `uid` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `sotien` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `seri` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `code` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `loaithe` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `time` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `noidung` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `tinhtrang` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `tranid` text,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
 
 -- Dumping data for table hso.naptien: ~0 rows (approximately)
 DELETE FROM `naptien`;
 
+-- Dumping structure for table hso.nap_tay
+DROP TABLE IF EXISTS `nap_tay`;
+CREATE TABLE IF NOT EXISTS `nap_tay` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `user_name` varchar(255) NOT NULL,
+  `user_actions` varchar(255) NOT NULL,
+  `type` tinyint(4) NOT NULL,
+  `coin` int(11) NOT NULL,
+  `vnd` int(11) NOT NULL,
+  `logger` text NOT NULL,
+  `time` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 -- Dumping data for table hso.nap_tay: ~0 rows (approximately)
 DELETE FROM `nap_tay`;
+
+-- Dumping structure for table hso.npc
+DROP TABLE IF EXISTS `npc`;
+CREATE TABLE IF NOT EXISTS `npc` (
+  `IDItem` int(11) NOT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `namegt` varchar(255) DEFAULT NULL,
+  `IDImage` int(11) DEFAULT NULL,
+  `wBlock` int(11) DEFAULT NULL,
+  `hBlock` int(11) DEFAULT NULL,
+  `nFrame` int(11) DEFAULT NULL,
+  `IdBigAvatar` int(11) DEFAULT NULL,
+  `infoObject` varchar(255) DEFAULT NULL,
+  `isPerson` tinyint(4) DEFAULT NULL,
+  `isShowHP` tinyint(4) DEFAULT NULL,
+  PRIMARY KEY (`IDItem`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- Dumping data for table hso.npc: ~86 rows (approximately)
 DELETE FROM `npc`;
@@ -12345,6 +12985,15 @@ INSERT INTO `npc` (`IDItem`, `name`, `namegt`, `IDImage`, `wBlock`, `hBlock`, `n
 	(-3, 'Lisa', 'Giao tiếp', 1, 0, 0, 2, 1, 'Máu và năng lượng chưa bao giờ là thừa cả. Hãy nhớ điều đó.', 1, 0),
 	(-2, 'Zoro', 'Giao tiếp', 0, 0, 0, 2, 0, 'Ta thấy từ con một nguồn sức mạnh rất lớn, hãy cố gắng luyện tập.', 1, 0);
 
+-- Dumping structure for table hso.options
+DROP TABLE IF EXISTS `options`;
+CREATE TABLE IF NOT EXISTS `options` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `key` varchar(255) DEFAULT NULL,
+  `value` longtext,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=243 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+
 -- Dumping data for table hso.options: ~29 rows (approximately)
 DELETE FROM `options`;
 INSERT INTO `options` (`id`, `key`, `value`) VALUES
@@ -12378,8 +13027,90 @@ INSERT INTO `options` (`id`, `key`, `value`) VALUES
 	(241, 'maintain_time', '2024-02-05 22:40:00'),
 	(242, 'maintain_name', '');
 
+-- Dumping structure for table hso.order_vang
+DROP TABLE IF EXISTS `order_vang`;
+CREATE TABLE IF NOT EXISTS `order_vang` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `player_id` int(11) NOT NULL,
+  `player_name` varchar(50) NOT NULL,
+  `tranId` text NOT NULL,
+  `partnerId` text NOT NULL,
+  `partnerName` text NOT NULL,
+  `amount` text NOT NULL,
+  `amount_vang` bigint(20) NOT NULL,
+  `comment` text NOT NULL,
+  `time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 -- Dumping data for table hso.order_vang: ~0 rows (approximately)
 DELETE FROM `order_vang`;
+
+-- Dumping structure for table hso.player
+DROP TABLE IF EXISTS `player`;
+CREATE TABLE IF NOT EXISTS `player` (
+  `id` int(11) unsigned zerofill NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) DEFAULT NULL,
+  `body` varchar(255) DEFAULT NULL,
+  `clazz` tinyint(4) DEFAULT NULL,
+  `maxInventory` tinyint(4) DEFAULT '42',
+  `maxBox` int(11) DEFAULT '14',
+  `maxBag` int(11) DEFAULT '42',
+  `diemdanh` tinyint(4) DEFAULT NULL,
+  `typeexp` tinyint(4) DEFAULT NULL,
+  `level` int(11) DEFAULT '1',
+  `exp` bigint(20) DEFAULT '0',
+  `point_activity` bigint(20) DEFAULT '0',
+  `site` varchar(255) DEFAULT NULL,
+  `rms_save` varchar(1000) DEFAULT NULL,
+  `friend` varchar(1000) DEFAULT '[]',
+  `eff` varchar(1000) DEFAULT '[]',
+  `enemies` varchar(1000) DEFAULT '[]',
+  `skill` varchar(255) DEFAULT NULL,
+  `item3` text,
+  `item4` text,
+  `item5` text,
+  `item7` text,
+  `itembox3` text,
+  `itembox4` text,
+  `itembox5` text,
+  `itembox7` text,
+  `itembag3` text,
+  `itembag4` text,
+  `itembag7` text,
+  `itemwear` text,
+  `pet` text,
+  `vang` bigint(20) DEFAULT NULL,
+  `kimcuong` int(11) DEFAULT NULL,
+  `tiemnang` int(11) DEFAULT NULL,
+  `kynang` int(11) DEFAULT NULL,
+  `point1` int(11) DEFAULT NULL,
+  `point2` int(11) DEFAULT NULL,
+  `point3` int(11) DEFAULT NULL,
+  `point4` int(11) DEFAULT NULL,
+  `point_arena` int(11) NOT NULL DEFAULT '0',
+  `giftcode` varchar(1000) DEFAULT '[]',
+  `date` varchar(255) DEFAULT NULL,
+  `medal_create_material` varchar(255) DEFAULT NULL,
+  `item_star_material` varchar(255) NOT NULL DEFAULT '[]',
+  `count_dungeon` int(11) DEFAULT '10',
+  `freez2` tinyint(4) DEFAULT '0',
+  `hieuchien` int(11) DEFAULT '0',
+  `time_block_ctg` bigint(20) DEFAULT '0',
+  `diem_tieu_sai` int(11) NOT NULL DEFAULT '0',
+  `type_use_horse` tinyint(4) DEFAULT '-1',
+  `point_king_cup` int(11) DEFAULT '0',
+  `group_king_cup` int(11) DEFAULT '-1',
+  `type_reward_king_cup` int(11) DEFAULT '0',
+  `skill_110` varchar(255) DEFAULT '[-1,-1]',
+  `quest_daily` varchar(255) DEFAULT '[-1,-1,0,0,20]',
+  `point_z6` bigint(20) DEFAULT '0',
+  `point_event` int(11) NOT NULL DEFAULT '0',
+  `tanthu` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '0=chưa nhận, 1=đã nhận',
+  `muakhu2` tinyint(1) unsigned NOT NULL DEFAULT '3',
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE KEY `name` (`name`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 -- Dumping data for table hso.player: ~2 rows (approximately)
 DELETE FROM `player`;
@@ -12387,8 +13118,43 @@ INSERT INTO `player` (`id`, `name`, `body`, `clazz`, `maxInventory`, `maxBox`, `
 	(00000000001, 'ascasc', '[0,8,1]', 1, 42, 14, 42, 1, 1, 12, 183, 624, '[0,614,210]', '[[],[]]', '[]', '[]', '[]', '[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]', '[[205,4,6,1,41,0,0,0,0,[[14,14],[16,197],[17,193],[18,181],[19,186],[20,190]],0,0,0],[180,4,3,1,36,0,0,0,0,[[9,96],[14,12]],0,0,0],[202,4,6,3,40,2,0,0,0,[[14,17],[15,477],[24,9],[25,5]],0,0,0],[116,3,0,1,23,1,3,0,0,[[14,41],[19,289]],0,0,0],[40,0,2,1,8,0,0,0,0,[[7,93],[14,16]],0,0,0],[286,4,5,1,57,1,0,0,0,[[23,3],[24,5],[25,9],[26,5]],0,0,0],[25,1,9,1,5,0,1,0,0,[[4,47],[40,108]],0,0,0],[296,4,5,1,59,1,0,0,0,[[27,551]],0,0,0],[126,1,1,1,25,1,1,0,0,[[14,16],[23,0]],0,0,0],[130,2,1,1,26,0,2,0,0,[[14,11],[26,9]],0,0,0]]', '[[2,103],[5,103]]', NULL, '[[48,1],[0,2],[1,3],[2,1],[3,4],[46,2],[47,1]]', '[]', '[]', NULL, '[]', '[]', '[]', '[]', '[[5,1,9,1,1,0,0,0,[[0,54],[40,120]],0,0,0],[105,1,0,1,21,0,1,0,[[14,52],[20,100]],1,0,0],[145,1,1,1,29,0,1,0,[[14,18],[24,3]],7,0,0]]', '[]', 23, 379, 60, 12, 16, 16, 16, 16, 0, '[]', 'Tue Mar 17 14:16:25 ICT 2026', '[295,261,318,328,341,249,285,321,329,344,284,280,316,327,344,288,280,317,327,342]', '[425,447,330,341,458,421,441,335,344,462,422,453,327,344,458,417,444,328,336,462,432,448,332,339,459,424,446,329,342,462,417,440,327,341,458,431,455,335,341,461]', 10, 0, 0, 0, 0, -1, 0, -1, 0, '[-1,-1]', '[-1,-1,0,0,20]', 0, 0, 1, 3),
 	(00000000002, 'cscscasc', '[1,9,1]', 1, 42, 14, 42, 1, 1, 4, 22244, 171, '[0,271,424]', '[[],[]]', '[]', '[]', '[]', '[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]', '[[261,4,4,1,52,1,0,0,0,[[9,289]],0,0,0],[110,2,0,1,22,0,2,0,0,[[14,41],[17,196]],0,0,0]]', '[[2,100],[5,100]]', NULL, '[[48,1],[0,2],[2,1],[46,1]]', '[]', '[]', NULL, '[]', '[]', '[]', '[]', '[[5,1,9,1,1,0,0,0,[[0,54],[40,120]],0,0,0],[105,1,0,1,21,0,1,0,[[14,52],[20,100]],1,0,0],[145,1,1,1,29,0,1,0,[[14,18],[24,3]],7,0,0]]', '[]', 6, 15, 20, 4, 8, 8, 8, 8, 0, '[]', 'Tue Mar 17 15:56:31 ICT 2026', '[295,261,318,328,341,249,285,321,329,344,284,280,316,327,344,288,280,317,327,342]', '[434,447,327,337,463,426,438,333,344,457,427,440,330,344,457,418,440,327,339,462,422,437,327,339,459,419,444,327,342,463,429,455,327,341,461,426,440,327,338,458]', 10, 0, 0, 0, 0, -1, 0, -1, 0, '[-1,-1]', '[-1,-1,0,0,20]', 0, 0, 1, 3);
 
+-- Dumping structure for table hso.posts
+DROP TABLE IF EXISTS `posts`;
+CREATE TABLE IF NOT EXISTS `posts` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `tieude` varchar(75) NOT NULL,
+  `noidung` text NOT NULL,
+  `username` varchar(50) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `theloai` int(11) NOT NULL DEFAULT '0',
+  `ghimbai` int(11) NOT NULL DEFAULT '0',
+  `image` varchar(255) DEFAULT NULL,
+  `trangthai` int(11) NOT NULL DEFAULT '0',
+  `tinhtrang` int(11) NOT NULL DEFAULT '0',
+  `count_view` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
+
 -- Dumping data for table hso.posts: ~0 rows (approximately)
 DELETE FROM `posts`;
+
+-- Dumping structure for table hso.skills
+DROP TABLE IF EXISTS `skills`;
+CREATE TABLE IF NOT EXISTS `skills` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_skill` int(11) NOT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `icon` tinyint(4) DEFAULT NULL,
+  `type` tinyint(4) DEFAULT NULL,
+  `range` int(11) DEFAULT NULL,
+  `detail` varchar(3000) DEFAULT NULL,
+  `typeBuff` tinyint(4) DEFAULT NULL,
+  `subEff` tinyint(4) DEFAULT NULL,
+  `performDur` int(11) DEFAULT NULL,
+  `typePaint` tinyint(4) DEFAULT NULL,
+  `data` varchar(5000) DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=1205 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 -- Dumping data for table hso.skills: ~1,204 rows (approximately)
 DELETE FROM `skills`;
@@ -13598,10 +14364,62 @@ INSERT INTO `skills` (`id`, `id_skill`, `name`, `icon`, `type`, `range`, `detail
 	(1203, 1, 'Phát súng công phá', 52, 0, 130, 'Phát bắn với sức công phá của đạn hoa cải.', 0, -1, 0, 0, '[90,11,1000,0,0,0,0,0,[[7,26000],[33,400],[0,180]],1,0]'),
 	(1204, 0, 'Bắn thường', 51, 0, 90, 'Sử dụng đạn súng hỏa mai.', 0, -1, 0, 0, '[0,1,1000,0,0,0,0,0,[],1,0]');
 
--- Dumping data for table hso.squire: ~1 rows (approximately)
+-- Dumping structure for table hso.squire
+DROP TABLE IF EXISTS `squire`;
+CREATE TABLE IF NOT EXISTS `squire` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) DEFAULT NULL,
+  `body` varchar(255) DEFAULT NULL,
+  `clazz` tinyint(4) DEFAULT NULL,
+  `typeexp` tinyint(4) DEFAULT NULL,
+  `level` int(11) DEFAULT '10',
+  `exp` bigint(20) DEFAULT '0',
+  `site` varchar(255) DEFAULT NULL,
+  `rms_save` varchar(1000) DEFAULT NULL,
+  `friend` text,
+  `eff` text,
+  `enemies` text,
+  `skill` varchar(255) DEFAULT NULL,
+  `itemwear` text,
+  `pet` text,
+  `tiemnang` int(11) DEFAULT NULL,
+  `kynang` int(11) DEFAULT NULL,
+  `point1` int(11) DEFAULT NULL,
+  `point2` int(11) DEFAULT NULL,
+  `point3` int(11) DEFAULT NULL,
+  `point4` int(11) DEFAULT NULL,
+  `point_arena` int(11) NOT NULL DEFAULT '0',
+  `date` varchar(255) DEFAULT NULL,
+  `medal_create_material` varchar(255) DEFAULT NULL,
+  `item_star_material` varchar(255) NOT NULL DEFAULT '[]',
+  `hieuchien` int(11) DEFAULT '0',
+  `time_block_ctg` bigint(20) DEFAULT '0',
+  `count_dungeon` tinyint(4) DEFAULT '10',
+  `skill_110` varchar(255) DEFAULT '[-1,-1]',
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE KEY `name` (`name`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+
+-- Dumping data for table hso.squire: ~0 rows (approximately)
 DELETE FROM `squire`;
 INSERT INTO `squire` (`id`, `name`, `body`, `clazz`, `typeexp`, `level`, `exp`, `site`, `rms_save`, `friend`, `eff`, `enemies`, `skill`, `itemwear`, `pet`, `tiemnang`, `kynang`, `point1`, `point2`, `point3`, `point4`, `point_arena`, `date`, `medal_create_material`, `item_star_material`, `hieuchien`, `time_block_ctg`, `count_dungeon`, `skill_110`) VALUES
 	(-10111, 'player', '[1,10,3]', 3, 1, 10, 0, '[]', '[[],[]]', '[]', '[]', '[]', '[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]', '[[15,3,10,1,3,0,0,0,[[0,50],[40,120]],0,0,0],[95,3,0,1,19,0,3,0,[[14,44],[16,200]],1,0,0],[55,3,2,1,11,0,3,0,[[7,200],[14,14]],6,0,0],[135,3,1,1,27,0,3,0,[[14,14],[24,4]],7,0,0]]', '[]', 45, 9, 5, 5, 5, 5, 0, 'Wed Nov 05 20:20:55 ICT 2025', '[295,261,318,328,341,249,285,321,329,344,284,280,316,327,344,288,280,317,327,342]', '[424,450,331,341,460,431,446,329,338,463,435,444,327,338,458,424,449,333,338,463,424,438,327,342,459,430,454,329,341,461,426,452,329,341,462,435,437,327,343,459]', 0, 0, 10, '[-1,-1]');
+
+-- Dumping structure for table hso.task
+DROP TABLE IF EXISTS `task`;
+CREATE TABLE IF NOT EXISTS `task` (
+  `id` smallint(6) DEFAULT NULL,
+  `name` varchar(50) DEFAULT NULL,
+  `idNpcFrom` smallint(6) DEFAULT NULL,
+  `idNpcTo` smallint(6) DEFAULT NULL,
+  `strDetailTalk` text,
+  `strDetailTalkFinish` text,
+  `strDetailHelp` text,
+  `strDetailHelpFinish` text,
+  `isMainTask` tinyint(4) DEFAULT NULL,
+  `typeItem` int(11) DEFAULT NULL,
+  `infoQuest` varchar(50) DEFAULT '[]'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- Dumping data for table hso.task: ~4 rows (approximately)
 DELETE FROM `task`;
@@ -13610,6 +14428,19 @@ INSERT INTO `task` (`id`, `name`, `idNpcFrom`, `idNpcTo`, `strDetailTalk`, `strD
 	(1, 'Tiến vào làng Sói', -6, -6, '1 Chúng ta rất tiếc không thể cho cậu qua được! Nếu muốn vào làng thì cậu sẽ phải vượt qua một bài kiểm tra nhỏ.>1 Hãy nhìn xung quanh thấy những con kẹo dẻo chứ? >1 Bọn chúng gọi là Smiley, phải công nhận chúng rất dễ thương, nhưng lại rất nghịch nghợm và đùa dai như đỉa!>1 Ta muốn cậu hãy dùng khả năng đấm đá của mình để xua đuổi chúng đi nơi khác, sau đó bọn ta sẽ cho phép cậu bước vào làng.>1 Hãy cho ta xem cậu làm được gì nào!', '1 Ha ha.. Trông cậu múa cứ như là một thằng nhóc mới tập võ ấy. Nhờ vậy mà lũ Smiley không dám đến đây phá nữa.>1 Chúng ta có thể ngủ ngon được rồi, xem như cậu đã vượt qua bài kiểm tra này.>1 Cảm ơn và Chào mừng đến với làng Sói - Nơi sản sinh ra những sát thủ Bạch Cẩu huyền thoại!>1 À này, khi vào trong nhớ tìm gặp Trưởng làng trước tiên đấy nhé, mọi người gọi ông ấy là Zoro, người có một vết sẹo trên mắt ấy.', 'Đánh đuổi 10 con Smiley, sau đó quay trở lại gặp anh Lính gác để hoàn thành bài thử thách.', 'Nhiệm vụ hoàn thành. Bạn đã được phép tiến vào Làng Sói.', 1, 1, '[[0,0,10]]'),
 	(2, 'Thử Thách Đầu Tiên', -2, -2, '1 Ta chính là trưởng làng Zoro, làng ta rất vinh dự chào đón những con người trẻ như cậu.>1 Ở đây chỉ có duy nhất một công việc dành cho những người mới đến, đó là học cách để trở thành một công dân của làng Sói.>1 Tiện thể xin tự giới thiệu: ta chính là bậc thầy huấn luyện nên những chiến binh mạnh nhất thế giới, cậu gặp may rồi nhé!>1 Đó là nhờ khóa học mang tên siêu khổ luyện do ta sáng tạo ra, bao gồm vô số những thử thách mà cậu sẽ phải vượt qua.>1 Không chờ đợi được, ta sẽ nói luôn thử thách đầu tiên, hãy nghe cho kỹ nhé:>1 Thời gian gần đây, dân làng đi vào khu Rừng Ảo Giác hay bị tấn công bởi một sinh vật nào đó rất khủng khiếp.>1 Dĩ nhiên, nhiệm vụ của cậu là đi đến Khu Rừng Ảo Giác và tìm ra sinh vật bí ẩn kia là gì. Rất đơn giản phải không?>1 Để đến được đó, cậu phải băng qua một cái hang ở khu Bìa Rừng cạnh ngôi làng này. Nhưng trước tiên, cậu phải biết những kỹ năng chiến đấu cơ bản đã.>1 Hãy đi chào hỏi những người khác trong làng như thợ rèn Hammer, cô thầy thuốc Lisa, thợ may áo giáp Doubar, anh chàng phù thủy tập sự Zulu v.v... Họ sẽ chỉ dạy những bài học đầu tiên cho cậu.>1 Nào, bây giờ thì hãy đến gặp mọi người đi. Ta sẽ luôn theo dõi từng hành động của cậu, đừng có hy vọng bỏ trốn nhiệm vụ đấy nhé!', '1 Khá lắm, loài sinh vật bí ẩn tấn công dân làng cuối cùng đã lộ diện. Vậy chính xác nó là một loại cây ăn thịt nhỏ xíu? Và có một làn khí hắc ám tỏa ra xung quanh?>1 Điều này không bình thường chút nào. Khu rừng ảo giác là nơi rất cách biệt so với thế giới bên ngoài... Không lẽ thế lực bóng tối đã lan tới đây rồi chăng?>1 Ta quên mất, chúc mừng cậu đã vượt qua được thử thách đầu tiên của ta rồi đó! >1 Bây giờ ta sẽ đến với bài học quan trọng nhất: Bài học 4 điều cần ghi nhớ của một chiến binh.>1 Hãy đến gặp người bạn của ta - thợ may áo giáp Doubar, ông ta sẽ chỉ dẫn cho cậu những gì phải làm kế tiếp.', 'Đi xuống một cái hang nằm đâu đó trong Bìa Rừng, phía Nam ngôi làng để đến Khu Rừng Ảo Giác. Truy tìm sinh vật bí ẩn đã tấn công dân làng.', 'Bạn đã đánh bại sinh vật bí ẩn trong khu rừng Ảo giác, nhiệm vụ chính hoàn thành! Hãy tìm Doubar để nhận công việc tiếp theo.', 1, 1, '[[5,0,1]]'),
 	(3, 'Tảng Đá Ghi Nhớ', -4, -4, '1 Ta chính là Doubar, người cung cấp áo giáp và trang bị trong làng.>1 Từ bây giờ ta sẽ thay thế Zoro dạy cho cậu bốn điều ghi nhớ để có thể trở thành một hiệp sĩ thực thụ. Trước hết cậu phải đi tìm cho ra đó là 4 điều gì.>1 Khu vực rộng lớn ở phía Bắc làng gọi là Cánh Đồng Sói, cậu hãy đi về phía Nam của cánh đồng, băng qua thung lũng kỳ bí, một cái hồ lớn cho đến khi cậu bước vào khu rừng đặc biệt. Trong đó có bốn tảng bia đá đặt ở bốn góc.>1 Trên mỗi trụ đá có khắc bốn điều ghi nhớ mà ta muốn nói đến, nét chữ của kẻ đã khắc xấu kinh khủng nên hãy đọc cho kỹ rồi quay trở về đây.>1 Nhưng hãy cẩn thận vì lúc đó cậu sẽ phải đối mặt với một con quái vật nổi tiếng chốn rừng sâu, nó luôn ở đó chờ đợi những kẻ nào đến gần các tảng đá.>1 Bây giờ thì hãy đi chuẩn bị tất cả những gì cần thiết cho thử thách lần này, và đừng quên dạo mắt qua cửa hàng áo giáp của ta nhé!', '', 'Từ Cánh Đồng Sói đi về phía Nam, băng qua Thung Lũng Kỳ Bí để đến một cái hồ thủy quái, đi vòng quanh bờ hồ để bước vào nơi có những tảng bia đá.Đối đầu với một con quái vật nguy hiểm.', '', 1, 1, '[[11,0,1]]');
+
+-- Dumping structure for table hso.time_boss
+DROP TABLE IF EXISTS `time_boss`;
+CREATE TABLE IF NOT EXISTS `time_boss` (
+  `map_id` int(11) NOT NULL,
+  `boss_name` varchar(255) DEFAULT NULL,
+  `zone_1` bigint(20) DEFAULT NULL,
+  `zone_2` bigint(20) DEFAULT NULL,
+  `zone_3` bigint(20) DEFAULT NULL,
+  `zone_4` bigint(20) DEFAULT NULL,
+  `zone_5` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`map_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- Dumping data for table hso.time_boss: ~10 rows (approximately)
 DELETE FROM `time_boss`;
@@ -13624,6 +14455,19 @@ INSERT INTO `time_boss` (`map_id`, `boss_name`, `zone_1`, `zone_2`, `zone_3`, `z
 	(62, 'Kỵ sĩ địa ngục', 1762175595136, 1761991194605, 1762176059750, 1762042277808, 1761281110988),
 	(76, 'Nhện chúa', 1762263900931, 1762267385397, 1762265341637, 1762269496303, 1762273083949),
 	(79, 'Giant Skeleton', 1762036569118, 1761193839117, 1761194510923, 1761194111301, 1761194082616);
+
+-- Dumping structure for table hso.transfer
+DROP TABLE IF EXISTS `transfer`;
+CREATE TABLE IF NOT EXISTS `transfer` (
+  `id` int(11) NOT NULL,
+  `userId` int(11) NOT NULL,
+  `vndtruoc` bigint(20) NOT NULL,
+  `vndsau` int(20) NOT NULL,
+  `luongtruoc` int(20) NOT NULL,
+  `luongsau` int(20) NOT NULL,
+  `time` int(20) NOT NULL,
+  `created_at` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- Dumping data for table hso.transfer: ~0 rows (approximately)
 DELETE FROM `transfer`;
