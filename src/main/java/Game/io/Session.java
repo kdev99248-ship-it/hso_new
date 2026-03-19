@@ -690,10 +690,10 @@ public class Session implements Runnable {
         if (this.list_char == null || !this.list_char[2].isEmpty()) {
             return;
         }
-        if (!this.list_char[0].isEmpty()) {
-            notice_create_char("Chỉ tạo 1 nhân vật");
-            return;
-        }
+//        if (!this.list_char[0].isEmpty()) {
+//            notice_create_char("Chỉ tạo 1 nhân vật");
+//            return;
+//        }
         byte clazz = m.reader().readByte();
         String name = m.reader().readUTF().toLowerCase();
         byte hair = m.reader().readByte();

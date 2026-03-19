@@ -38,7 +38,7 @@ public class MessageHandler {
     }
 
     public void process_msg(Message m) throws IOException {
-//        System.out.println("CMD " + m.cmd);
+        System.out.println("CMD " + m.cmd);
         switch (m.cmd) {
             case -100: {
                 if (conn.p.isdie) {

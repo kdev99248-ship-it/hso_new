@@ -140,7 +140,7 @@ public class Service {
         m.writer().writeByte(p.hair);
         //
         byte[] i1 = new byte[]{0, 1, 2, 3, 4, 53, 54, 55, 7, 8, 9, 10, 11, 14, 15, 16, 17, 18, 19, 20, 27, 28, 33, 34,
-            35, 36, 40, 112, -75, -74, -73};
+                35, 36, 40, 112, -75, -74, -73};
         m.writer().writeByte(i1.length);
         for (int i = 0; i < i1.length; i++) {
             m.writer().writeByte(i1[i]);
@@ -1362,6 +1362,24 @@ public class Service {
         m.cleanup();
     }
 
+    public static void send_box_input_text(Session conn, int idNpc, byte idMenu, String text, String[] in4) throws IOException {
+        Message m = new Message(-31);
+        m.writer().writeShort(idNpc);
+        m.writer().writeByte(idMenu);
+        m.writer().writeUTF(text);
+        m.writer().writeByte(in4.length);
+        for (int i = 0; i < in4.length; i++) {
+            m.writer().writeUTF(in4[i]);
+            m.writer().writeByte(0);
+        }
+        for (int i = 0; i < in4.length; i++) {
+            m.writer().writeUTF("");
+            m.writer().writeByte(0);
+        }
+        conn.addmsg(m);
+        m.cleanup();
+    }
+
     public static void send_in4_item(Session conn, Message m) throws IOException {
         short id = m.reader().readShort();
         // for (int i = 0; i < conn.p.item.bag3.length; i++) {
@@ -1771,7 +1789,7 @@ public class Service {
                     case 3:
                         Log.gI().add_log(conn.p.name, "Bán item " + conn.p.item.inventory3[id].name);
                     case 4:
-                    case 7: 
+                    case 7:
                         int quantity = conn.p.item.total_item_by_id(type, id);
                         conn.p.update_vang(quantity * 5, "Nhận %s vàng từ việc bán item vào shop");
                         conn.p.item.remove(type, id, quantity);
@@ -1779,7 +1797,7 @@ public class Service {
                             Log.gI().add_log(conn.p.name, "Bán item type47 ID : " + id + ", số lượng " + quantity);
                         }
                         break;
-                    
+
                 }
                 break;
             }
@@ -1979,7 +1997,7 @@ public class Service {
                         p.update_vang(-price, "Trừ %s vàng từ việc mua item shop nguyên liệu");
                         Log.gI().add_log(p.name,
                                 "mua " + quanity + " item " + ItemTemplate7.item.get(idbuy).getName() + " hết"
-                                + Util.number_format(price) + " vàng");
+                                        + Util.number_format(price) + " vàng");
                     } else {
                         if (p.get_ngoc() < price) {
                             send_notice_box(p.conn, "Bạn không đủ ngọc");
@@ -1988,7 +2006,7 @@ public class Service {
                         p.update_ngoc(-price, "Trừ %s ngọc từ việc mua item shop nguyên liệu");
                         Log.gI().add_log(p.name,
                                 "mua " + quanity + " item " + ItemTemplate7.item.get(idbuy).getName() + " hết"
-                                + Util.number_format(price) + " ngọc");
+                                        + Util.number_format(price) + " ngọc");
                     }
                     int quant_add_bag = quanity + p.item.total_item_by_id(7, idbuy);
                     if (quant_add_bag > 32000) {

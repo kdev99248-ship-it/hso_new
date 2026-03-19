@@ -29,6 +29,25 @@ public class Item3 {
     public short index;
 
     public Item3() {
+
+    }
+
+    public static Item3 createNewItem(short iditem) {
+        Item3 itbag = new Item3();
+        itbag.id = iditem;
+        itbag.name = ItemTemplate3.item.get(iditem).getName();
+        itbag.clazz = ItemTemplate3.item.get(iditem).getClazz();
+        itbag.type = ItemTemplate3.item.get(iditem).getType();
+        itbag.level = ItemTemplate3.item.get(iditem).getLevel();
+        itbag.icon = ItemTemplate3.item.get(iditem).getIcon();
+        itbag.op = new ArrayList<>();
+        itbag.op.addAll(ItemTemplate3.item.get(iditem).getOp());
+        itbag.color = ItemTemplate3.item.get(iditem).getColor();
+        itbag.part = ItemTemplate3.item.get(iditem).getPart();
+        itbag.tier = 0;
+        itbag.islock = false;
+        itbag.time_use = 0;
+        return itbag;
     }
 
     public Item3(Item3 Origin) {
@@ -82,7 +101,8 @@ public class Item3 {
         if (CheckItem.isMeDay(temp.id)) {
             if (temp.item_medal == null) {
                 temp.item_medal = new short[5];
-            };
+            }
+            ;
             for (int j = 0; j < temp.item_medal.length; j++) {
                 jsar4.add(temp.item_medal[j]);
             }

@@ -1,6 +1,7 @@
 package Game.client;
 
 import Game.Helps._Time;
+import Game.consts.ConstNpc;
 import Game.core.Util;
 import Game.map.MapService;
 import Game.core.GameSrc;
@@ -14,6 +15,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Objects;
 import java.util.regex.Pattern;
 
 import org.json.simple.JSONArray;
@@ -44,147 +46,141 @@ public class TextFromClient {
         short idnpc = m2.reader().readShort();
         short idmenu = m2.reader().readShort();
         byte size = m2.reader().readByte();
-        if (idmenu != 0) {
-            return;
-        }
+        System.out.println("id npc :: " + idnpc + " id menu :: " + idmenu + " size  ::: " + size);
         switch (idnpc) {
-
-            case 999: {
-                if (size != 3) {
-                    return;
-                }
-                String value1 = m2.reader().readUTF();
-                String value2 = m2.reader().readUTF();
-                String value3 = m2.reader().readUTF();
-
-                if (!value1.equals(conn.pass)) {
-                    Service.send_notice_box(conn, "Mật khẩu không đúng");
-                    return;
-                }
-                if (value2.equals(value1) || !value2.equals(value3)) {
-                    Service.send_notice_box(conn, "Mật khẩu mới không hợp lệ");
-                    return;
-                }
-                try (Connection connection = SQL.gI().getConnection(); Statement st = connection.createStatement()) {
-                    st.execute("UPDATE `account` SET `pass` = '" + value2 + "' WHERE `user` = '" + conn.user + "';");
-                    connection.commit();
-                } catch (SQLException ex) {
-                    ex.printStackTrace();
-                    Service.send_notice_box(conn, "Có lỗi xảy ra");
-                    return;
-                }
-                Service.send_notice_box(conn, " Đổi mật khẩu mới thành công");
-                break;
-            }
-            case 0: {
-                // Đệ tử
-                if (!conn.p.isOwner) {
-                    return;
-                }
-                if (size != 1) {
-                    return;
-                }
-                String text = m2.reader().readUTF();
-                text = text.toLowerCase();
-                Pattern p = Pattern.compile("^[a-zA-Z0-9]{1,15}$");
-                if (!p.matcher(text).matches()) {
-                    Service.send_notice_box(conn, "Đã xảy ra lỗi");
-                    return;
-                }
-                for (String txt : conn.p.giftcode) {
-                    txt = txt.toLowerCase();
-                    if (txt.equals((text)) && conn.ac_admin < 4) {
-                        Service.send_notice_box(conn, "Bạn đã nhập giftcode này rồi");
+            case -63:
+                if (idmenu == ConstNpc.MENU_DOI_MK) {
+                    // read value from input
+                    String newPassword = m2.reader().readUTF();
+                    if (newPassword.isEmpty()) {
+                        Service.send_notice_box(conn, "Hãy nhập gì đó!");
                         return;
                     }
-                }
-                try (Connection connection = SQL.gI().getConnection(); Statement st = connection.createStatement(); ResultSet rs = st.executeQuery("SELECT * FROM `giftcode` WHERE `giftname` = '" + text + "';")) {
-                    byte empty_box = (byte) 0;
-                    if (!rs.next()) {
-                        Service.send_notice_box(conn, "Giftcode đã được nhập hoặc không tồn tại");
-                    } else {
-                        List<Short> IDs = new ArrayList<>();
-                        List<Integer> Quants = new ArrayList<>();
-                        List<Short> Types = new ArrayList<>();
-                        empty_box = rs.getByte("empty_box");//ô trống trong ht cần
-                        int limit = rs.getInt("limit");// lượt nhập
-                        String gift_for = rs.getString("gift_for");// chỉ cho 1 name nhận
-                        int level = rs.getInt("level");//yêu cầu level
-                        int needActive = rs.getInt("needActive");// cần kích hoạt mới đc nhập
-                        if (needActive == 0 && conn.status != 0) {
-                            Service.send_notice_box(conn, "Cần kích hoạt để nhập GIFTCODE này");
-                        } else if (!gift_for.isEmpty() && !gift_for.equals(conn.user)) {
-                            Service.send_notice_box(conn, "Gift code này không dành cho bạn");
-                        } else if (level > conn.p.level) {
-                            Service.send_notice_box(conn, "Để nhập giftcode cần đạt level " + level);
-                        } else if (limit < 1 && conn.ac_admin < 4) {
-                            Service.send_notice_box(conn, "Đã hết lượt dùng giftcode này");
-                        } else if (conn.p.item.get_inventory_able() >= empty_box) {
-                            conn.p.giftcode.add(text);
-                            
-                            //
-                            JSONArray jsar = (JSONArray) JSONValue.parse(rs.getString("item4"));
-                            for (Object o : jsar) {
-                                JSONArray jsar2 = (JSONArray) JSONValue.parse(o.toString());
-                                Item47 itbag = new Item47();
-                                itbag.id = Short.parseShort(jsar2.get(0).toString());
-                                itbag.quantity = Short.parseShort(jsar2.get(1).toString());
-                                itbag.category = 4;
-                                IDs.add(itbag.id);
-                                Quants.add((int) itbag.quantity);
-                                Types.add((short) itbag.category);
-                                conn.p.item.add_item_inventory47(4, itbag);
-                            }
-                            jsar.clear();
-                            //
-                            jsar = (JSONArray) JSONValue.parse(rs.getString("item7"));
-                            for (Object o : jsar) {
-                                JSONArray jsar2 = (JSONArray) JSONValue.parse(o.toString());
-                                Item47 itbag = new Item47();
-                                itbag.id = Short.parseShort(jsar2.get(0).toString());
-                                itbag.quantity = Short.parseShort(jsar2.get(1).toString());
-                                itbag.category = 7;
-                                IDs.add(itbag.id);
-                                Quants.add((int) itbag.quantity);
-                                Types.add((short) itbag.category);
-                                conn.p.item.add_item_inventory47(7, itbag);
-
-                            }
-                            jsar.clear();
-
-                            long vang_up = rs.getLong("vang");
-                            int ngoc_up = rs.getInt("ngoc");
-                            conn.p.update_vang(vang_up, "Nhận %s vàng từ nhập giftcode " + text);
-                            conn.p.update_ngoc(ngoc_up, "Nhận %s ngọc từ nhập giftcode " + text);
-                            if (vang_up != 0) {
-                                IDs.add((short) -1);
-                                Quants.add((int) (vang_up > 2_000_000_000 ? 2_000_000_000 : vang_up));
-                                Types.add((short) 4);
-                            }
-                            if (ngoc_up != 0) {
-                                IDs.add((short) -2);
-                                Quants.add((int) (ngoc_up > 2_000_000_000 ? 2_000_000_000 : ngoc_up));
-                                Types.add((short) 4);
-                            }
-
-                            short[] ar_id = new short[IDs.size()];
-                            int[] ar_quant = new int[Quants.size()];
-                            short[] ar_type = new short[Types.size()];
-                            for (int i = 0; i < ar_id.length; i++) {
-                                ar_id[i] = IDs.get(i);
-                                ar_quant[i] = Quants.get(i);
-                                ar_type[i] = Types.get(i);
-                            }
-                            Service.Show_open_box_notice_item(conn.p, "Bạn nhận được", ar_id, ar_quant, ar_type);
-                        } else {
-                            Service.send_notice_box(conn, "Hành trang phải trống " + empty_box + " ô trở lên!");
-                        }
+                    try (Connection connection = SQL.gI().getConnection(); Statement st = connection.createStatement()) {
+                        st.execute("UPDATE `account` SET `pass` = '" + newPassword + "' WHERE `user` = '" + conn.user + "';");
+                        connection.commit();
+                    } catch (SQLException ex) {
+                        ex.printStackTrace();
+                        Service.send_notice_box(conn, "Có lỗi xảy ra");
+                        return;
                     }
-                } catch (SQLException e) {
-                    e.printStackTrace();
+                    Service.send_notice_box(conn, " Đổi mật khẩu mới thành công");
                 }
                 break;
-            }
+            case -44:
+                if (idmenu == ConstNpc.MENU_DOI_GIFTCODE) {
+                    // Đệ tử
+                    if (!conn.p.isOwner) {
+                        return;
+                    }
+                    if (!conn.p.active) {
+                        Service.send_notice_box(conn, "Bạn cần kích  hoạt thành viên để dùng chức năng này!");
+                        return;
+                    }
+                    if (size != 1) {
+                        return;
+                    }
+                    String text = m2.reader().readUTF();
+                    text = text.toLowerCase();
+                    Pattern p = Pattern.compile("^[a-zA-Z0-9]{1,15}$");
+                    if (!p.matcher(text).matches()) {
+                        Service.send_notice_box(conn, "Đã xảy ra lỗi");
+                        return;
+                    }
+                    for (String txt : conn.p.giftcode) {
+                        txt = txt.toLowerCase();
+                        if (txt.equals((text)) && conn.ac_admin < 4) {
+                            Service.send_notice_box(conn, "Bạn đã nhập giftcode này rồi");
+                            return;
+                        }
+                    }
+                    try (Connection connection = SQL.gI().getConnection(); Statement st = connection.createStatement(); ResultSet rs = st.executeQuery("SELECT * FROM `giftcode` WHERE `giftname` = '" + text + "';")) {
+                        byte empty_box = (byte) 0;
+                        if (!rs.next()) {
+                            Service.send_notice_box(conn, "Giftcode đã được nhập hoặc không tồn tại");
+                        } else {
+                            List<Short> IDs = new ArrayList<>();
+                            List<Integer> Quants = new ArrayList<>();
+                            List<Short> Types = new ArrayList<>();
+                            empty_box = rs.getByte("empty_box");//ô trống trong ht cần
+                            int limit = rs.getInt("limit");// lượt nhập
+                            String gift_for = rs.getString("gift_for");// chỉ cho 1 name nhận
+                            int level = rs.getInt("level");//yêu cầu level
+                            int needActive = rs.getInt("needActive");// cần kích hoạt mới đc nhập
+                            if (needActive == 0 && conn.status != 0) {
+                                Service.send_notice_box(conn, "Cần kích hoạt để nhập GIFTCODE này");
+                            } else if (!gift_for.isEmpty() && !gift_for.equals(conn.user)) {
+                                Service.send_notice_box(conn, "Gift code này không dành cho bạn");
+                            } else if (level > conn.p.level) {
+                                Service.send_notice_box(conn, "Để nhập giftcode cần đạt level " + level);
+                            } else if (limit < 1 && conn.ac_admin < 4) {
+                                Service.send_notice_box(conn, "Đã hết lượt dùng giftcode này");
+                            } else if (conn.p.item.get_inventory_able() >= empty_box) {
+                                conn.p.giftcode.add(text);
+
+                                //
+                                JSONArray jsar = (JSONArray) JSONValue.parse(rs.getString("item4"));
+                                for (Object o : jsar) {
+                                    JSONArray jsar2 = (JSONArray) JSONValue.parse(o.toString());
+                                    Item47 itbag = new Item47();
+                                    itbag.id = Short.parseShort(jsar2.get(0).toString());
+                                    itbag.quantity = Short.parseShort(jsar2.get(1).toString());
+                                    itbag.category = 4;
+                                    IDs.add(itbag.id);
+                                    Quants.add((int) itbag.quantity);
+                                    Types.add((short) itbag.category);
+                                    conn.p.item.add_item_inventory47(4, itbag);
+                                }
+                                jsar.clear();
+                                //
+                                jsar = (JSONArray) JSONValue.parse(rs.getString("item7"));
+                                for (Object o : jsar) {
+                                    JSONArray jsar2 = (JSONArray) JSONValue.parse(o.toString());
+                                    Item47 itbag = new Item47();
+                                    itbag.id = Short.parseShort(jsar2.get(0).toString());
+                                    itbag.quantity = Short.parseShort(jsar2.get(1).toString());
+                                    itbag.category = 7;
+                                    IDs.add(itbag.id);
+                                    Quants.add((int) itbag.quantity);
+                                    Types.add((short) itbag.category);
+                                    conn.p.item.add_item_inventory47(7, itbag);
+
+                                }
+                                jsar.clear();
+
+                                long vang_up = rs.getLong("vang");
+                                int ngoc_up = rs.getInt("ngoc");
+                                conn.p.update_vang(vang_up, "Nhận %s vàng từ nhập giftcode " + text);
+                                conn.p.update_ngoc(ngoc_up, "Nhận %s ngọc từ nhập giftcode " + text);
+                                if (vang_up != 0) {
+                                    IDs.add((short) -1);
+                                    Quants.add((int) (vang_up > 2_000_000_000 ? 2_000_000_000 : vang_up));
+                                    Types.add((short) 4);
+                                }
+                                if (ngoc_up != 0) {
+                                    IDs.add((short) -2);
+                                    Quants.add((int) (Math.min(ngoc_up, 2_000_000_000)));
+                                    Types.add((short) 4);
+                                }
+
+                                short[] ar_id = new short[IDs.size()];
+                                int[] ar_quant = new int[Quants.size()];
+                                short[] ar_type = new short[Types.size()];
+                                for (int i = 0; i < ar_id.length; i++) {
+                                    ar_id[i] = IDs.get(i);
+                                    ar_quant[i] = Quants.get(i);
+                                    ar_type[i] = Types.get(i);
+                                }
+                                Service.Show_open_box_notice_item(conn.p, "Bạn nhận được", ar_id, ar_quant, ar_type);
+                            } else {
+                                Service.send_notice_box(conn, "Hành trang phải trống " + empty_box + " ô trở lên!");
+                            }
+                        }
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                }
+                break;
             case 1: {
                 if (conn.ac_admin > 3) {
                     if (size != 3) {
@@ -209,20 +205,7 @@ public class TextFromClient {
                                 if (iditem > (ItemTemplate3.item.size() - 1) || iditem < 0) {
                                     return;
                                 }
-                                Item3 itbag = new Item3();
-                                itbag.id = iditem;
-                                itbag.name = ItemTemplate3.item.get(iditem).getName();
-                                itbag.clazz = ItemTemplate3.item.get(iditem).getClazz();
-                                itbag.type = ItemTemplate3.item.get(iditem).getType();
-                                itbag.level = ItemTemplate3.item.get(iditem).getLevel();
-                                itbag.icon = ItemTemplate3.item.get(iditem).getIcon();
-                                itbag.op = new ArrayList<>();
-                                itbag.op.addAll(ItemTemplate3.item.get(iditem).getOp());
-                                itbag.color = ItemTemplate3.item.get(iditem).getColor();
-                                itbag.part = ItemTemplate3.item.get(iditem).getPart();
-                                itbag.tier = 0;
-                                itbag.islock = false;
-                                itbag.time_use = 0;
+                                Item3 itbag = Item3.createNewItem(iditem);
                                 conn.p.item.add_item_inventory3(itbag);
                                 conn.p.item.char_inventory(3);
                                 break;

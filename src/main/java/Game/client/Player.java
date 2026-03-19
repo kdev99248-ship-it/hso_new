@@ -38,6 +38,7 @@ public class Player extends Body {
     public long timeCantChangeMap;
     public byte head;
     public byte eye;
+    public boolean active;
     public byte hair;
     public Date date;
     public byte freez2;
@@ -255,6 +256,7 @@ public class Player extends Body {
                 return false;
             }
             //
+            this.active = rs.getBoolean("active");
             this.kham = new Kham_template();
             this.name = rs.getString("name");
             this.timeBlockCTG = rs.getLong("time_block_ctg");
